@@ -33,7 +33,7 @@ export default function LiveAtelierConfigurator() {
   const totalPrice = silhouette.base + fabric.price + neckline.price + embroidery.price;
 
   return (
-    <section className="atelier-configurator-section" aria-label="Interactive Atelier Customizer Preview">
+    <section className="atelier-configurator-section" id="atelier" aria-label="Interactive Atelier Customizer Preview">
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto var(--space-12)' }}>
           <div className="section-tag">✦ LIVE ATELIER DESIGN STUDIO</div>

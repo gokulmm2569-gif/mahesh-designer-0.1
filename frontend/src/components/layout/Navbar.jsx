@@ -69,6 +69,25 @@ export default function Navbar() {
     { label: 'Custom Sizing', query: 'custom' },
   ];
 
+  const handleNavClick = (e, targetId) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       {/* Modern Floating Glassmorphic Header */}
@@ -91,7 +110,7 @@ export default function Navbar() {
             </button>
 
             {/* Regal Crest & Monogram Logo with Clean Text Container */}
-            <Link to="/" className="navbar-brand" aria-label="Mahesh Designer Home">
+            <Link to="/" className="navbar-brand" aria-label="Mahesh Designer Home" onClick={(e) => handleNavClick(e, 'hero')}>
               <div className="navbar-brand-logo">
                 MD
               </div>
@@ -102,86 +121,11 @@ export default function Navbar() {
             </Link>
 
 
-            {/* Navigation Links with Mega-Menu Flyouts */}
+            {/* Navigation Links */}
             <div className="navbar-nav">
-              <NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>
+              <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} className="nav-link-item">
                 Home
-              </NavLink>
-
-              {/* Collections with Mega-Menu */}
-              <div className="nav-item-dropdown">
-                <NavLink to="/products" className={({ isActive }) => isActive ? 'active' : ''} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                  <span>Collections</span>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: 1 }}>
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </NavLink>
-
-                {/* Rich Glass Mega-Menu Panel */}
-                <div className="mega-menu-panel">
-                  <div>
-                    <div className="mega-menu-col-title">Signature Categories</div>
-                    <div className="mega-menu-list">
-                      <Link to="/products?category=bridal-wear">✦ Royal Bridal Lehengas</Link>
-                      <Link to="/products?category=designer-blouses">✦ Handcrafted Aari Blouses</Link>
-                      <Link to="/products?category=sarees">✦ Pure Kanjivaram Silks</Link>
-                      <Link to="/products?category=party-wear">✦ Reception Evening Gowns</Link>
-                      <Link to="/products?category=anarkali">✦ Kalidar Festive Anarkalis</Link>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="mega-menu-col-title">Artisanal Specialities</div>
-                    <div className="mega-menu-list">
-                      <Link to="/custom-stitching">🪡 Custom Blouse Tailoring</Link>
-                      <Link to="/products?fabric=Pure+Silk">🧵 Pure Mulberry Silk</Link>
-                      <Link to="/products?embroidery=Aari+with+Zari">✨ Antique Zari & Zardozi</Link>
-                      <Link to="/products?is_featured=true">🌟 New Season 2026</Link>
-                      <Link to="/custom-stitching">📏 Virtual Measurement</Link>
-                    </div>
-                  </div>
-
-                  {/* Visual Editorial Spotlight Card */}
-                  <div className="mega-menu-card">
-                    <img
-                      src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600"
-                      alt="Bridal Couture Spotlight"
-                    />
-                    <div className="mega-menu-card-overlay" />
-                    <div className="mega-menu-card-content">
-                      <span style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--clr-gold-light)', fontWeight: 800 }}>
-                        2026 BRIDAL REEL
-                      </span>
-                      <h4 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'var(--text-base)', color: '#FFFFFF', margin: '2px 0 6px' }}>
-                        The Royal Heritage Collection
-                      </h4>
-                      <Link to="/products?category=bridal-wear" className="btn btn-gold btn-sm" style={{ padding: '4px 12px', fontSize: '10px' }}>
-                        Explore Reel →
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bridal Wear Link */}
-              <NavLink to="/products?category=bridal-wear" className={({ isActive }) => isActive ? 'active' : ''}>
-                Bridal
-              </NavLink>
-
-              {/* Blouses Link */}
-              <NavLink to="/products?category=designer-blouses" className={({ isActive }) => isActive ? 'active' : ''}>
-                Blouses
-              </NavLink>
-
-              {/* Sarees Link */}
-              <NavLink to="/products?category=sarees" className={({ isActive }) => isActive ? 'active' : ''}>
-                Sarees
-              </NavLink>
-
-              {/* Lehengas Link */}
-              <NavLink to="/products?category=lehengas" className={({ isActive }) => isActive ? 'active' : ''}>
-                Lehengas
-              </NavLink>
+              </a>
 
               {/* Glowing Pulse Custom Stitching Button with SVG */}
               <NavLink to="/custom-stitching" className="nav-stitching-btn">
@@ -228,7 +172,7 @@ export default function Navbar() {
                 onClick={() => setCartOpen(true)}
                 aria-label="Open Shopping Bag"
                 title="Shopping Bag"
-                style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '0 0.8rem', width: 'auto', borderRadius: 'var(--radius-full)' }}
+                style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '0 0.95rem', width: 'auto', borderRadius: 'var(--radius-full)' }}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -236,7 +180,7 @@ export default function Navbar() {
                   <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
                 {cartTotal > 0 && (
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--clr-emerald)' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--clr-emerald-dark)' }}>
                     ₹{Number(cartTotal).toLocaleString('en-IN')}
                   </span>
                 )}
@@ -253,7 +197,7 @@ export default function Navbar() {
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                     className="btn btn-outline btn-sm"
-                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '0.4rem 0.85rem', borderRadius: 'var(--radius-full)' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '0.45rem 0.95rem', borderRadius: 'var(--radius-full)', background: '#FFFFFF' }}
                   >
                     <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'var(--clr-emerald)', color: 'var(--clr-gold)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 800 }}>
                       {user?.full_name ? user.full_name.charAt(0).toUpperCase() : 'U'}
@@ -305,11 +249,11 @@ export default function Navbar() {
                   )}
                 </div>
               ) : (
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <Link to="/login" className="btn btn-outline btn-sm" id="nav-login-btn" style={{ borderRadius: 'var(--radius-full)', padding: '0.4rem 0.85rem', fontSize: '10.5px' }}>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <Link to="/login" className="btn btn-outline btn-sm" id="nav-login-btn" style={{ borderRadius: 'var(--radius-full)', padding: '0.45rem 1rem', fontSize: '11px', fontWeight: 700, background: '#FFFFFF' }}>
                     Sign In
                   </Link>
-                  <Link to="/register" className="btn btn-gold btn-sm" id="nav-register-btn" style={{ borderRadius: 'var(--radius-full)', padding: '0.4rem 0.85rem', fontSize: '10.5px' }}>
+                  <Link to="/register" className="btn btn-gold btn-sm" id="nav-register-btn" style={{ borderRadius: 'var(--radius-full)', padding: '0.45rem 1rem', fontSize: '11px', fontWeight: 800 }}>
                     Join
                   </Link>
                 </div>
@@ -331,12 +275,7 @@ export default function Navbar() {
               gap: 'var(--space-3)',
               boxShadow: 'var(--shadow-xl)'
             }}>
-              <NavLink to="/" end className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={() => setMobileMenuOpen(false)}>Home</NavLink>
-              <NavLink to="/products" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={() => setMobileMenuOpen(false)}>All Collections</NavLink>
-              <NavLink to="/products?category=bridal-wear" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={() => setMobileMenuOpen(false)}>Bridal Wear</NavLink>
-              <NavLink to="/products?category=designer-blouses" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={() => setMobileMenuOpen(false)}>Designer Blouses</NavLink>
-              <NavLink to="/products?category=sarees" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={() => setMobileMenuOpen(false)}>Pure Silk Sarees</NavLink>
-              <NavLink to="/products?category=lehengas" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={() => setMobileMenuOpen(false)}>Lehengas</NavLink>
+              <a href="#hero" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={(e) => handleNavClick(e, 'hero')}>Home</a>
               <NavLink to="/custom-stitching" className="btn btn-gold" style={{ justifyContent: 'center', borderRadius: 'var(--radius-full)' }} onClick={() => setMobileMenuOpen(false)}>
                 🪡 Launch Custom Stitching Studio
               </NavLink>

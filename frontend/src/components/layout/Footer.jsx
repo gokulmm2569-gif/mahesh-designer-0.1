@@ -36,12 +36,12 @@ export default function Footer() {
           <div>
             <div className="footer-col-title">Boutique Collections</div>
             <ul className="footer-links">
-              <li><Link to="/products?category=bridal-wear">Bridal Wear</Link></li>
-              <li><Link to="/products?category=designer-blouses">Designer Aari Blouses</Link></li>
-              <li><Link to="/products?category=sarees">Pure Silk & Banarasi Sarees</Link></li>
-              <li><Link to="/products?category=lehengas">Flared Couture Lehengas</Link></li>
-              <li><Link to="/products?category=anarkali">Kalidar Anarkalis</Link></li>
-              <li><Link to="/products?category=party-wear">Reception Party Wear</Link></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Bridal Wear</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Designer Aari Blouses</a></li>
+              <li><a href="#craftsmanship" onClick={(e) => { e.preventDefault(); document.getElementById('craftsmanship')?.scrollIntoView({ behavior: 'smooth' }); }}>Pure Silk & Banarasi Sarees</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Flared Couture Lehengas</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Kalidar Anarkalis</a></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }}>Reception Party Wear</a></li>
             </ul>
           </div>
 
@@ -53,7 +53,7 @@ export default function Footer() {
               <li><Link to="/custom-stitching">Live Measurement Matrix</Link></li>
               <li><Link to="/custom-stitching">Aari & Zardozi Customization</Link></li>
               <li><Link to="/orders">Order Tracking & Dispatch</Link></li>
-              <li><Link to="/products">Worldwide Express Delivery</Link></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }}>Live Bespoke Tailoring Blueprint</a></li>
             </ul>
           </div>
 

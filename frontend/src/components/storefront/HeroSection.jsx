@@ -46,7 +46,7 @@ export default function HeroSection() {
   const current = HERO_LOOKS[activeLook];
 
   return (
-    <section className="hero-editorial-section" aria-label="Mahesh Designer Editorial Showcase">
+    <section className="hero-editorial-section" id="hero" aria-label="Mahesh Designer Editorial Showcase">
       <div className="container">
         <div className="hero-editorial-grid">
           {/* Left Column: Bold Minimalist Editorial Narrative */}
@@ -73,13 +73,20 @@ export default function HeroSection() {
 
             {/* High-Fashion Minimalist CTAs */}
             <div className="hero-cta-group">
-              <Link to="/products" className="btn-vercel-primary">
+              <a
+                href="#collections"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn-vercel-primary"
+              >
                 <span>Explore the work</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 7h10v10"></path>
                   <path d="M7 17 17 7"></path>
                 </svg>
-              </Link>
+              </a>
 
               <Link to="/custom-stitching" className="btn-vercel-secondary">
                 <span>The Bespoke Studio</span>

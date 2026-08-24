@@ -55,30 +55,75 @@ const SELECTED_COLLECTIONS = [
 ];
 
 export default function CollectionsSection() {
-  const navigate = useNavigate();
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
-      {/* 1. Category Strip (matching mahesh-designer-lake.vercel.app) */}
+      {/* 1. Category Strip */}
       <section className="category-strip-section" aria-label="Fashion categories">
         <div className="container">
           <div className="category-strip-grid">
-            {FASHION_CATEGORIES.map((cat, idx) => (
-              <Link
-                key={cat.title}
-                to={cat.isCustom ? '/custom-stitching' : `/products?category=${cat.categoryQuery}`}
-                className="category-strip-item group"
-              >
-                <div>
-                  <h3 className="category-strip-title">{cat.title}</h3>
-                  <p className="category-strip-subtitle">{cat.subtitle}</p>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="category-strip-arrow">
-                  <path d="M7 7h10v10"></path>
-                  <path d="M7 17 17 7"></path>
-                </svg>
-              </Link>
-            ))}
+            <a
+              href="#craftsmanship"
+              onClick={(e) => { e.preventDefault(); scrollTo('craftsmanship'); }}
+              className="category-strip-item group"
+            >
+              <div>
+                <h3 className="category-strip-title">Traditional</h3>
+                <p className="category-strip-subtitle">Rooted in heritage</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="category-strip-arrow">
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path>
+              </svg>
+            </a>
+
+            <a
+              href="#collections"
+              onClick={(e) => { e.preventDefault(); scrollTo('collections'); }}
+              className="category-strip-item group"
+            >
+              <div>
+                <h3 className="category-strip-title">Modern</h3>
+                <p className="category-strip-subtitle">Cut for now</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="category-strip-arrow">
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path>
+              </svg>
+            </a>
+
+            <a
+              href="#collections"
+              onClick={(e) => { e.preventDefault(); scrollTo('collections'); }}
+              className="category-strip-item group"
+            >
+              <div>
+                <h3 className="category-strip-title">Bridal</h3>
+                <p className="category-strip-subtitle">For the beginning</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="category-strip-arrow">
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path>
+              </svg>
+            </a>
+
+            <Link
+              to="/custom-stitching"
+              className="category-strip-item group"
+            >
+              <div>
+                <h3 className="category-strip-title">Custom</h3>
+                <p className="category-strip-subtitle">Made around you</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="category-strip-arrow">
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path>
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -91,13 +136,17 @@ export default function CollectionsSection() {
               <p className="section-eyebrow-accent">Selected work</p>
               <h2 className="selected-work-title">The collection.</h2>
             </div>
-            <Link to="/products" className="view-all-link">
+            <a
+              href="#atelier"
+              onClick={(e) => { e.preventDefault(); scrollTo('atelier'); }}
+              className="view-all-link"
+            >
               <span>View all work</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M7 7h10v10"></path>
                 <path d="M7 17 17 7"></path>
               </svg>
-            </Link>
+            </a>
           </div>
 
           <div className="selected-work-grid">
@@ -105,7 +154,8 @@ export default function CollectionsSection() {
               <article
                 key={item.id}
                 className={`selected-work-card ${item.stagger ? 'stagger-card' : ''}`}
-                onClick={() => navigate(`/products?category=${item.slug}`)}
+                onClick={() => scrollTo('atelier')}
+                style={{ cursor: 'pointer' }}
               >
                 <div className="selected-work-img-wrap">
                   <img
@@ -168,7 +218,11 @@ export default function CollectionsSection() {
                 </svg>
               </Link>
 
-              <Link to="/products?category=bridal-wear" className="service-row-item group">
+              <a
+                href="#collections"
+                onClick={(e) => { e.preventDefault(); scrollTo('collections'); }}
+                className="service-row-item group"
+              >
                 <div className="service-left">
                   <span className="service-mono-num">02</span>
                   <span className="service-name">Bridal and wedding wear</span>
@@ -177,9 +231,13 @@ export default function CollectionsSection() {
                   <path d="M7 7h10v10"></path>
                   <path d="M7 17 17 7"></path>
                 </svg>
-              </Link>
+              </a>
 
-              <Link to="/products?category=sarees" className="service-row-item group">
+              <a
+                href="#craftsmanship"
+                onClick={(e) => { e.preventDefault(); scrollTo('craftsmanship'); }}
+                className="service-row-item group"
+              >
                 <div className="service-left">
                   <span className="service-mono-num">03</span>
                   <span className="service-name">Traditional occasion wear</span>
@@ -188,9 +246,13 @@ export default function CollectionsSection() {
                   <path d="M7 7h10v10"></path>
                   <path d="M7 17 17 7"></path>
                 </svg>
-              </Link>
+              </a>
 
-              <Link to="/products?category=party-wear" className="service-row-item group">
+              <a
+                href="#atelier"
+                onClick={(e) => { e.preventDefault(); scrollTo('atelier'); }}
+                className="service-row-item group"
+              >
                 <div className="service-left">
                   <span className="service-mono-num">04</span>
                   <span className="service-name">Modern wardrobe design</span>
@@ -199,7 +261,7 @@ export default function CollectionsSection() {
                   <path d="M7 7h10v10"></path>
                   <path d="M7 17 17 7"></path>
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

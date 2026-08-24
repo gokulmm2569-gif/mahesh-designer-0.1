@@ -64,7 +64,7 @@ export default function InteractiveFabricLens() {
   };
 
   return (
-    <section className="fabric-lens-section" aria-label="Haute Couture Fabric Inspection Studio">
+    <section className="fabric-lens-section" id="craftsmanship" aria-label="Haute Couture Fabric Inspection Studio">
       <div className="container">
         {/* Section Header */}
         <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto var(--space-12)' }}>
@@ -225,9 +225,16 @@ export default function InteractiveFabricLens() {
               <Link to="/custom-stitching" className="btn btn-gold btn-lg" style={{ flex: 1, textAlign: 'center' }}>
                 🪡 Stitch With This Fabric →
               </Link>
-              <Link to="/products" className="btn btn-outline-white btn-lg">
+              <a
+                href="#collections"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn btn-outline-white btn-lg"
+              >
                 View Catalog
-              </Link>
+              </a>
             </div>
           </div>
         </div>
