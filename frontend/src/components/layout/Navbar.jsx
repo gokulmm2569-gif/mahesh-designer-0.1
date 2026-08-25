@@ -14,13 +14,24 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [consultModalOpen, setConsultModalOpen] = useState(false);
-  const [currency, setCurrency] = useState('INR');
   const [consultSubmitted, setConsultSubmitted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [consultForm, setConsultForm] = useState({ name: '', phone: '', date: '', type: 'Bridal Blouse & Lehenga' });
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Keyboard shortcut for spotlight search (Cmd+K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Close overlays on navigation
   useEffect(() => {
@@ -92,7 +103,6 @@ export default function Navbar() {
     <>
       {/* Modern Floating Glassmorphic Header */}
       <div className="floating-navbar-container">
-
         <nav
           className={`navbar-floating ${scrolled ? 'scrolled' : ''}`}
           role="navigation"
@@ -104,13 +114,19 @@ export default function Navbar() {
               className="navbar-mobile-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation"
-              style={{ display: 'none', background: 'none', border: 'none', fontSize: '1.4rem', color: 'var(--clr-emerald)', cursor: 'pointer' }}
+              data-cursor="MENU"
             >
               {mobileMenuOpen ? '✕' : '☰'}
             </button>
 
-            {/* Regal Crest & Monogram Logo with Clean Text Container */}
-            <Link to="/" className="navbar-brand" aria-label="Mahesh Designer Home" onClick={(e) => handleNavClick(e, 'hero')}>
+            {/* Regal Crest & Monogram Logo */}
+            <Link
+              to="/"
+              className="navbar-brand"
+              aria-label="Mahesh Designer Home"
+              onClick={(e) => handleNavClick(e, 'hero')}
+              data-cursor="MD"
+            >
               <div className="navbar-brand-logo">
                 MD
               </div>
@@ -120,15 +136,19 @@ export default function Navbar() {
               </div>
             </Link>
 
-
             {/* Navigation Links */}
             <div className="navbar-nav">
-              <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} className="nav-link-item">
+              <a
+                href="#hero"
+                onClick={(e) => handleNavClick(e, 'hero')}
+                className="nav-link-item"
+                data-cursor="HOME"
+              >
                 Home
               </a>
 
-              {/* Glowing Pulse Custom Stitching Button with SVG */}
-              <NavLink to="/custom-stitching" className="nav-stitching-btn">
+              {/* Glowing Pulse Custom Stitching Button */}
+              <NavLink to="/custom-stitching" className="nav-stitching-btn" data-cursor="STUDIO">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/>
                   <line x1="4" y1="21" x2="20" y2="21"/>
@@ -139,22 +159,31 @@ export default function Navbar() {
 
             {/* Right Action Icons & Gateway */}
             <div className="navbar-actions">
-              {/* Spotlight Search Trigger */}
+              {/* Spotlight Search Trigger with Cmd+K hint */}
               <button
                 id="nav-search-btn"
-                className="navbar-icon-btn"
+                className="navbar-icon-btn spotlight-trigger-btn"
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search Collections"
-                title="Search Spotlight"
+                title="Search Spotlight (⌘K)"
+                data-cursor="SEARCH"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
+                <span className="search-shortcut-tag">⌘K</span>
               </button>
 
               {/* Wishlist Heart */}
-              <Link to="/wishlist" id="nav-wishlist-btn" className="navbar-icon-btn" aria-label="Wishlist" title="Saved Wishlist">
+              <Link
+                to="/wishlist"
+                id="nav-wishlist-btn"
+                className="navbar-icon-btn"
+                aria-label="Wishlist"
+                title="Saved Wishlist"
+                data-cursor="WISHLIST"
+              >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
@@ -168,11 +197,11 @@ export default function Navbar() {
               {/* Cart Drawer Trigger */}
               <button
                 id="nav-cart-btn"
-                className="navbar-icon-btn"
+                className="navbar-icon-btn cart-pill-btn"
                 onClick={() => setCartOpen(true)}
                 aria-label="Open Shopping Bag"
                 title="Shopping Bag"
-                style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '0 0.95rem', width: 'auto', borderRadius: 'var(--radius-full)' }}
+                data-cursor="BAG"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -180,7 +209,7 @@ export default function Navbar() {
                   <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
                 {cartTotal > 0 && (
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--clr-emerald-dark)' }}>
+                  <span className="nav-cart-total-badge">
                     ₹{Number(cartTotal).toLocaleString('en-IN')}
                   </span>
                 )}
@@ -196,10 +225,10 @@ export default function Navbar() {
                 <div style={{ position: 'relative' }}>
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="btn btn-outline btn-sm"
-                    style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '0.45rem 0.95rem', borderRadius: 'var(--radius-full)', background: '#FFFFFF' }}
+                    className="btn btn-outline btn-sm user-nav-pill"
+                    data-cursor="ACCOUNT"
                   >
-                    <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'var(--clr-emerald)', color: 'var(--clr-gold)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 800 }}>
+                    <span className="user-nav-avatar">
                       {user?.full_name ? user.full_name.charAt(0).toUpperCase() : 'U'}
                     </span>
                     <span style={{ fontSize: '11px', fontWeight: 700 }}>{user?.full_name ? user.full_name.split(' ')[0] : 'Account'}</span>
@@ -210,21 +239,7 @@ export default function Navbar() {
 
                   {/* User Dropdown */}
                   {userDropdownOpen && (
-                    <div style={{
-                      position: 'absolute',
-                      top: 'calc(100% + 10px)',
-                      right: 0,
-                      width: 220,
-                      background: 'var(--clr-surface)',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1.5px solid var(--clr-gold)',
-                      boxShadow: 'var(--shadow-xl)',
-                      padding: 'var(--space-2)',
-                      zIndex: 1100,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 4
-                    }}>
+                    <div className="user-dropdown-menu">
                       <div style={{ padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--clr-border)', marginBottom: 2 }}>
                         <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--clr-charcoal)' }}>{user?.full_name || 'Client'}</div>
                         <div style={{ fontSize: '10px', color: 'var(--clr-slate)' }}>{user?.email}</div>
@@ -250,10 +265,10 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                  <Link to="/login" className="btn btn-outline btn-sm" id="nav-login-btn" style={{ borderRadius: 'var(--radius-full)', padding: '0.45rem 1rem', fontSize: '11px', fontWeight: 700, background: '#FFFFFF' }}>
+                  <Link to="/login" className="btn btn-outline btn-sm nav-auth-btn" id="nav-login-btn" data-cursor="LOGIN">
                     Sign In
                   </Link>
-                  <Link to="/register" className="btn btn-gold btn-sm" id="nav-register-btn" style={{ borderRadius: 'var(--radius-full)', padding: '0.45rem 1rem', fontSize: '11px', fontWeight: 800 }}>
+                  <Link to="/register" className="btn btn-gold btn-sm nav-auth-btn" id="nav-register-btn" data-cursor="JOIN">
                     Join
                   </Link>
                 </div>
@@ -261,20 +276,9 @@ export default function Navbar() {
             </div>
           </div>
 
-
           {/* Mobile Drawer */}
           {mobileMenuOpen && (
-            <div style={{
-              marginTop: 'var(--space-3)',
-              background: 'var(--clr-surface)',
-              border: '1.5px solid var(--clr-gold)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 'var(--space-5)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--space-3)',
-              boxShadow: 'var(--shadow-xl)'
-            }}>
+            <div className="mobile-nav-drawer">
               <a href="#hero" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={(e) => handleNavClick(e, 'hero')}>Home</a>
               <NavLink to="/custom-stitching" className="btn btn-gold" style={{ justifyContent: 'center', borderRadius: 'var(--radius-full)' }} onClick={() => setMobileMenuOpen(false)}>
                 🪡 Launch Custom Stitching Studio
@@ -291,7 +295,7 @@ export default function Navbar() {
       {searchOpen && (
         <div className="spotlight-overlay" onClick={() => setSearchOpen(false)}>
           <div className="spotlight-box" onClick={(e) => e.stopPropagation()}>
-            <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', padding: 'var(--space-4) var(--space-6)', borderBottom: '1.5px solid var(--clr-border)', gap: 'var(--space-3)' }}>
+            <form onSubmit={handleSearchSubmit} className="spotlight-form">
               <span style={{ fontSize: '1.4rem' }}>🔍</span>
               <input
                 type="search"
@@ -299,18 +303,10 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
-                style={{
-                  flex: 1,
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: 'var(--text-lg)',
-                  fontFamily: 'var(--font-functional)',
-                  background: 'transparent',
-                  color: 'var(--clr-charcoal)'
-                }}
+                className="spotlight-input"
               />
               <button type="submit" className="btn btn-gold btn-sm" style={{ borderRadius: 'var(--radius-full)' }}>Search</button>
-              <button type="button" onClick={() => setSearchOpen(false)} style={{ fontSize: '1.3rem', color: 'var(--clr-slate)', cursor: 'pointer' }}>✕</button>
+              <button type="button" onClick={() => setSearchOpen(false)} style={{ fontSize: '1.3rem', color: 'var(--clr-slate)', cursor: 'pointer', background: 'none', border: 'none' }}>✕</button>
             </form>
 
             <div style={{ padding: 'var(--space-6)' }}>
@@ -327,16 +323,7 @@ export default function Navbar() {
                       navigate(`/products?search=${encodeURIComponent(item.query)}`);
                       setSearchOpen(false);
                     }}
-                    style={{
-                      background: 'var(--clr-surface-muted)',
-                      border: '1px solid var(--clr-border)',
-                      borderRadius: 'var(--radius-full)',
-                      padding: '6px 14px',
-                      fontSize: 'var(--text-xs)',
-                      color: 'var(--clr-emerald)',
-                      cursor: 'pointer',
-                      fontWeight: 600
-                    }}
+                    className="spotlight-tag-btn"
                   >
                     {item.label}
                   </button>
@@ -348,7 +335,7 @@ export default function Navbar() {
                 <Link
                   to="/products?category=designer-blouses"
                   onClick={() => setSearchOpen(false)}
-                  style={{ background: 'var(--clr-surface)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--clr-border)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}
+                  className="spotlight-category-tile"
                 >
                   <span style={{ fontSize: '1.3rem' }}>👘</span>
                   <div>
@@ -360,7 +347,7 @@ export default function Navbar() {
                 <Link
                   to="/products?category=bridal-wear"
                   onClick={() => setSearchOpen(false)}
-                  style={{ background: 'var(--clr-surface)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--clr-border)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}
+                  className="spotlight-category-tile"
                 >
                   <span style={{ fontSize: '1.3rem' }}>👗</span>
                   <div>
@@ -372,7 +359,7 @@ export default function Navbar() {
                 <Link
                   to="/custom-stitching"
                   onClick={() => setSearchOpen(false)}
-                  style={{ background: 'var(--clr-gold-subtle)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--clr-gold)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}
+                  className="spotlight-category-tile is-atelier-tile"
                 >
                   <span style={{ fontSize: '1.3rem' }}>🪡</span>
                   <div>
@@ -469,7 +456,3 @@ export default function Navbar() {
     </>
   );
 }
-
-
-
-

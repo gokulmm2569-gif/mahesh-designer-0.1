@@ -36,12 +36,12 @@ export default function Footer() {
           <div>
             <div className="footer-col-title">Boutique Collections</div>
             <ul className="footer-links">
-              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Bridal Wear</a></li>
-              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Designer Aari Blouses</a></li>
-              <li><a href="#craftsmanship" onClick={(e) => { e.preventDefault(); document.getElementById('craftsmanship')?.scrollIntoView({ behavior: 'smooth' }); }}>Pure Silk & Banarasi Sarees</a></li>
-              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Flared Couture Lehengas</a></li>
-              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }}>Kalidar Anarkalis</a></li>
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }}>Reception Party Wear</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Bridal Wear</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Designer Aari Blouses</a></li>
+              <li><a href="#craftsmanship" onClick={(e) => { e.preventDefault(); document.getElementById('craftsmanship')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Pure Silk & Banarasi Sarees</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Flared Couture Lehengas</a></li>
+              <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Kalidar Anarkalis</a></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Reception Party Wear</a></li>
             </ul>
           </div>
 
@@ -49,11 +49,11 @@ export default function Footer() {
           <div>
             <div className="footer-col-title">Custom Tailoring</div>
             <ul className="footer-links">
-              <li><Link to="/custom-stitching">🪡 Custom Stitching Studio</Link></li>
-              <li><Link to="/custom-stitching">Live Measurement Matrix</Link></li>
-              <li><Link to="/custom-stitching">Aari & Zardozi Customization</Link></li>
-              <li><Link to="/orders">Order Tracking & Dispatch</Link></li>
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }}>Live Bespoke Tailoring Blueprint</a></li>
+              <li><Link to="/custom-stitching" data-cursor="STUDIO">🪡 Custom Stitching Studio</Link></li>
+              <li><Link to="/custom-stitching" data-cursor="MEASURE">Live Measurement Matrix</Link></li>
+              <li><Link to="/custom-stitching" data-cursor="EMBROIDER">Aari & Zardozi Customization</Link></li>
+              <li><Link to="/orders" data-cursor="ORDERS">Order Tracking & Dispatch</Link></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="BLUEPRINT">Live Bespoke Tailoring Blueprint</a></li>
             </ul>
           </div>
 
@@ -79,7 +79,7 @@ export default function Footer() {
                   required
                   style={{ background: 'rgba(253, 251, 247, 0.08)', color: 'var(--clr-ivory)', borderColor: 'rgba(212, 175, 55, 0.3)', fontSize: 'var(--text-xs)' }}
                 />
-                <button type="submit" className="btn btn-gold btn-sm">Join</button>
+                <button type="submit" className="btn btn-gold btn-sm" data-cursor="JOIN">Join</button>
               </form>
             )}
 
@@ -104,4 +104,3 @@ export default function Footer() {
     </footer>
   );
 }
-

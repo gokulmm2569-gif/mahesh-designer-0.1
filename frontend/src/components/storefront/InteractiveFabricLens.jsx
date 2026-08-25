@@ -91,6 +91,7 @@ export default function InteractiveFabricLens() {
                 setSelectedFabric(fabric);
                 setActiveHotspot(null);
               }}
+              data-cursor="SWATCH"
             >
               <span className="tab-indicator">✦</span>
               <span>{fabric.name.split(' on ')[0]}</span>
@@ -107,6 +108,7 @@ export default function InteractiveFabricLens() {
             onMouseEnter={() => setZoomActive(true)}
             onMouseLeave={() => setZoomActive(false)}
             onMouseMove={handleMouseMove}
+            data-cursor="ZOOM"
           >
             <img
               src={selectedFabric.img}
@@ -124,6 +126,7 @@ export default function InteractiveFabricLens() {
                   e.stopPropagation();
                   setActiveHotspot(activeHotspot === i ? null : i);
                 }}
+                data-cursor="POINT"
               >
                 <div className="hotspot-pulse" />
                 <div className="hotspot-core">✦</div>
@@ -156,7 +159,8 @@ export default function InteractiveFabricLens() {
                 }}
               >
                 <div className="loupe-reticle">
-                  <span className="reticle-label">{zoomLevel}x ZOOM</span>
+                  <span className="reticle-label">{zoomLevel}x LOUPE</span>
+                  <span className="reticle-coords">X:{Math.round(zoomPos.x)}% Y:{Math.round(zoomPos.y)}%</span>
                 </div>
               </div>
             )}
@@ -217,12 +221,13 @@ export default function InteractiveFabricLens() {
                 value={zoomLevel}
                 onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
                 style={{ width: '100%', accentColor: 'var(--clr-gold)', cursor: 'pointer' }}
+                aria-label="Magnifier Zoom Power Slider"
               />
             </div>
 
             {/* Action Triggers */}
             <div style={{ display: 'flex', gap: 'var(--space-4)', marginTop: 'var(--space-6)' }}>
-              <Link to="/custom-stitching" className="btn btn-gold btn-lg" style={{ flex: 1, textAlign: 'center' }}>
+              <Link to="/custom-stitching" className="btn btn-gold btn-lg" style={{ flex: 1, textAlign: 'center' }} data-cursor="STITCH">
                 🪡 Stitch With This Fabric →
               </Link>
               <a
@@ -232,6 +237,7 @@ export default function InteractiveFabricLens() {
                   document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="btn btn-outline-white btn-lg"
+                data-cursor="CATALOG"
               >
                 View Catalog
               </a>

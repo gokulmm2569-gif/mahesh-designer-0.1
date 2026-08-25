@@ -59,6 +59,7 @@ export default function LiveAtelierConfigurator() {
                     type="button"
                     className={`config-pill-btn ${silhouette.id === s.id ? 'active' : ''}`}
                     onClick={() => setSilhouette(s)}
+                    data-cursor="SILHOUETTE"
                   >
                     <span style={{ fontSize: '1.2rem' }}>{s.icon}</span>
                     <div style={{ textAlign: 'left' }}>
@@ -80,6 +81,7 @@ export default function LiveAtelierConfigurator() {
                     type="button"
                     className={`config-pill-btn ${fabric.id === f.id ? 'active' : ''}`}
                     onClick={() => setFabric(f)}
+                    data-cursor="FABRIC"
                   >
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ fontSize: '12px', fontWeight: 700 }}>{f.name}</div>
@@ -100,6 +102,7 @@ export default function LiveAtelierConfigurator() {
                     type="button"
                     className={`config-pill-btn ${neckline.id === n.id ? 'active' : ''}`}
                     onClick={() => setNeckline(n)}
+                    data-cursor="NECK"
                   >
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ fontSize: '12px', fontWeight: 700 }}>{n.name}</div>
@@ -120,6 +123,7 @@ export default function LiveAtelierConfigurator() {
                     type="button"
                     className={`config-pill-btn ${embroidery.id === e.id ? 'active' : ''}`}
                     onClick={() => setEmbroidery(e)}
+                    data-cursor="ZARI"
                   >
                     <div style={{ textAlign: 'left' }}>
                       <div style={{ fontSize: '12px', fontWeight: 700 }}>{e.name}</div>
@@ -146,6 +150,13 @@ export default function LiveAtelierConfigurator() {
                 alt="Bespoke Blueprint Preview"
                 className="blueprint-img"
               />
+
+              {/* Blueprint Caliper & Grid Overlay */}
+              <div className="blueprint-caliper-overlay" aria-hidden="true">
+                <div className="caliper-line top" />
+                <div className="caliper-line bottom" />
+                <div className="caliper-crosshair" />
+              </div>
 
               {/* Floating Blueprint Badge Top */}
               <div className="floating-badge-blueprint-top">
@@ -189,8 +200,9 @@ export default function LiveAtelierConfigurator() {
 
               <Link
                 to={`/custom-stitching?silhouette=${silhouette.id}&fabric=${encodeURIComponent(fabric.name)}&neckline=${encodeURIComponent(neckline.name)}&embroidery=${encodeURIComponent(embroidery.name)}`}
-                className="btn btn-primary btn-lg w-full"
+                className="btn btn-primary btn-lg w-full magnetic-btn"
                 style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+                data-cursor="MEASURE"
               >
                 <span>🪡</span> Submit My Exact Measurements →
               </Link>

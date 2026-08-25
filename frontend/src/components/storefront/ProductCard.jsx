@@ -43,7 +43,7 @@ export default function ProductCard({ product }) {
 
   return (
     <>
-      <article className="product-card" aria-label={product.name}>
+      <article className="product-card" aria-label={product.name} data-cursor="VIEW">
         <div className="product-card-img-wrap" onClick={() => setShowModal(true)} style={{ cursor: 'pointer' }}>
           <img
             src={primaryImg}
@@ -70,6 +70,7 @@ export default function ProductCard({ product }) {
               toggleWishlist(product.id);
             }}
             aria-label={wishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+            data-cursor="SAVE"
           >
             {wishlisted ? '♥' : '♡'}
           </button>
@@ -85,6 +86,7 @@ export default function ProductCard({ product }) {
                 setShowModal(true);
               }}
               aria-label={`Quick View ${product.name}`}
+              data-cursor="LOOK"
             >
               Quick View
             </button>
@@ -95,6 +97,7 @@ export default function ProductCard({ product }) {
               onClick={handleQuickAdd}
               disabled={adding}
               aria-label={`Add ${product.name} to bag`}
+              data-cursor="ADD"
             >
               {adding ? 'Adding...' : '+ Add to Bag'}
             </button>
@@ -135,4 +138,3 @@ export default function ProductCard({ product }) {
     </>
   );
 }
-

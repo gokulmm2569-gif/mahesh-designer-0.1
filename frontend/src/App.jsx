@@ -3,6 +3,8 @@ import { useAuth } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import CartDrawer from './components/cart/CartDrawer';
+import CustomCursor from './components/interactive/CustomCursor';
+import AmbientCanvas from './components/interactive/AmbientCanvas';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import CustomStitchingPage from './pages/CustomStitchingPage';
@@ -23,6 +25,8 @@ function ProtectedRoute({ children, adminOnly = false }) {
 function StoreLayout({ children }) {
   return (
     <div className="page-wrapper">
+      <AmbientCanvas />
+      <CustomCursor />
       <Navbar />
       <main className="page-content">{children}</main>
       <Footer />
