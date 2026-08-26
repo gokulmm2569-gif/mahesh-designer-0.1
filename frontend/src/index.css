@@ -507,20 +507,20 @@ ul, ol {
   background: #FFFFFF;
 }
 
-/* ─── Top Right Brand Header ─────────────────────────────────────── */
-.top-right-brand-container {
+/* ─── Top Left Brand Header ──────────────────────────────────────── */
+.top-left-brand-container {
   position: fixed;
   top: 20px;
-  right: 28px;
+  left: 28px;
   z-index: var(--z-nav);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   pointer-events: auto;
   animation: navbarBrandFloatUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
-.top-right-brand-container .navbar-brand {
+.top-left-brand-container .navbar-brand {
   padding: 8px 16px;
   background: rgba(253, 251, 247, 0.92);
   backdrop-filter: blur(16px);
@@ -530,10 +530,10 @@ ul, ol {
   box-shadow: 0 4px 20px rgba(13, 59, 46, 0.08);
 }
 
-.top-right-brand-container .brand-bottom-line {
+.top-left-brand-container .brand-bottom-line {
   width: 100%;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--clr-gold), var(--clr-gold-light));
+  background: linear-gradient(90deg, var(--clr-gold-light), var(--clr-gold), transparent);
   margin-top: 4px;
 }
 

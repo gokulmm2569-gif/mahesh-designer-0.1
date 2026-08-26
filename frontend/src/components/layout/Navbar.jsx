@@ -23,7 +23,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="top-right-brand-container">
+    <header className="top-left-brand-container">
       <Link
         to="/"
         className="navbar-brand"
