@@ -1189,6 +1189,179 @@ ul, ol {
   font-weight: 700;
 }
 
+/* Studio RHE Architectural Curtain Shutter System */
+.hero-curtain-container {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-curtain-layer {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-101%);
+  will-change: transform;
+}
+
+.curtain-layer-primary {
+  background: #C85A32;
+  z-index: 26;
+}
+
+.curtain-layer-secondary {
+  background: var(--clr-emerald-dark, #07261E);
+  z-index: 27;
+}
+
+.hero-curtain-brand-mark {
+  position: relative;
+  z-index: 28;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: scale(0.9);
+  color: var(--clr-gold-light, #fdfbf7);
+  pointer-events: none;
+}
+
+.curtain-brand-name {
+  font-family: var(--font-editorial);
+  font-size: 2.4rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.curtain-look-num {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  color: var(--clr-gold);
+  font-weight: 800;
+}
+
+.curtain-active .curtain-layer-primary {
+  animation: studioRheSweepPrimary 0.85s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.curtain-active .curtain-layer-secondary {
+  animation: studioRheSweepSecondary 0.85s cubic-bezier(0.77, 0, 0.175, 1) 0.08s forwards;
+}
+
+.curtain-active .hero-curtain-brand-mark {
+  animation: studioRheBrandReveal 0.85s ease forwards;
+}
+
+@keyframes studioRheSweepPrimary {
+  0% {
+    transform: translateX(-101%);
+  }
+  45%, 55% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(101%);
+  }
+}
+
+@keyframes studioRheSweepSecondary {
+  0% {
+    transform: translateX(-101%);
+  }
+  45%, 55% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(101%);
+  }
+}
+
+@keyframes studioRheBrandReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateX(-24px);
+  }
+  38%, 62% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.04) translateX(24px);
+  }
+}
+
+/* Interactive Navigation Chevrons on Hero Frame */
+.hero-frame-nav {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 15;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-editorial-right:hover .hero-frame-nav {
+  opacity: 1;
+}
+
+.hero-frame-nav-btn {
+  pointer-events: auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(7, 38, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--clr-gold);
+  color: var(--clr-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-frame-nav-btn:hover {
+  background: var(--clr-gold);
+  color: var(--clr-emerald-dark);
+  transform: scale(1.12);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.6);
+}
+
+/* Kinetic Text Reveals */
+.hero-text-reveal {
+  animation: studioRheTextReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-tag-text-animated {
+  display: inline-block;
+  animation: studioRheTextReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes studioRheTextReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 /* ─── 1. Category Strip / Spatial Interactive Nodes ───────────────── */
 .category-strip-section {
   border-top: 1px solid var(--clr-border);
@@ -2598,6 +2771,326 @@ ul, ol {
   .footer-bottom { flex-direction: column; gap: var(--space-4); text-align: center; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   CINEMATIC PAGE REVEAL OVERLAY & BRAND ENTRANCE ANIMATION
+   ═══════════════════════════════════════════════════════════════════ */
+.page-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  pointer-events: auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-reveal-overlay.is-revealed {
+  pointer-events: none;
+}
+
+/* 5-Column Vertical Staggered Panels */
+.reveal-panels-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  pointer-events: none;
+}
+
+.reveal-panel {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  will-change: transform;
+  transform: translateY(0);
+}
+
+/* Luxury Couture Panel Palette */
+.reveal-panel.panel-1 {
+  background: #051A14; /* Obsidian Jade */
+}
+.reveal-panel.panel-2 {
+  background: #092C22; /* Deep Forest Emerald */
+}
+.reveal-panel.panel-3 {
+  background: #0D3B2E; /* Imperial Emerald */
+}
+.reveal-panel.panel-4 {
+  background: #124335; /* Velvet Atelier Emerald */
+}
+.reveal-panel.panel-5 {
+  background: #061F18; /* Midnight Couture Green */
+}
+
+/* Panel Hairline Dividers & Inner Luxury Glow */
+.reveal-panel .panel-border-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(212, 175, 55, 0.25) 100%);
+  pointer-events: none;
+}
+
+.reveal-panel .panel-inner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Bottom to Top Staggered Wipe Keyframes */
+.page-reveal-overlay.is-revealing .reveal-panel {
+  animation: panelRiseUp 1.15s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation-delay: var(--panel-delay, 0ms);
+}
+
+@keyframes panelRiseUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-101%);
+  }
+}
+
+/* Center Brand Intro Lockup */
+.reveal-content-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.reveal-brand-lockup {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  animation: revealCrestEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealCrestEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-reveal-overlay.is-revealing .reveal-brand-lockup {
+  animation: revealCrestExit 0.75s cubic-bezier(0.76, 0, 0.24, 1) 0.25s forwards;
+}
+
+@keyframes revealCrestExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-36px);
+  }
+}
+
+.reveal-crest-wrapper {
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+
+.reveal-crest-ring {
+  width: 62px;
+  height: 62px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(7, 38, 30, 0.9) 0%, rgba(13, 59, 46, 0.95) 100%);
+  border: 1.5px solid var(--clr-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+}
+
+.reveal-crest-monogram {
+  font-family: var(--font-editorial);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--clr-gold);
+  letter-spacing: 0.05em;
+}
+
+.reveal-crest-accent-star {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 12px;
+  color: var(--clr-gold-light);
+  text-shadow: 0 0 10px rgba(243, 229, 171, 0.8);
+}
+
+.reveal-title-mask {
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.reveal-brand-title {
+  font-family: var(--font-editorial);
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 1.1;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.reveal-title-spacer {
+  display: inline-block;
+  width: 0.3em;
+}
+
+.reveal-gold-accent {
+  color: var(--clr-gold);
+}
+
+.reveal-subtitle-mask {
+  overflow: hidden;
+}
+
+.reveal-brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(243, 229, 171, 0.85);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reveal-dot-separator {
+  color: var(--clr-gold);
+  font-size: 0.6em;
+}
+
+.reveal-line-wrapper {
+  margin-top: var(--space-4);
+  display: flex;
+  justify-content: center;
+}
+
+.reveal-gold-line {
+  width: 80px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--clr-gold), transparent);
+}
+
+/* ─── Site-Level 'Mahesh Designer' Upward Float Transition ─────────── */
+.floating-navbar-container {
+  animation: navbarBrandFloatUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+}
+
+.navbar-brand-name {
+  display: inline-block;
+  animation: brandTextFloatUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both;
+}
+
+.navbar-brand-logo {
+  animation: brandLogoFloatUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+.navbar-brand-tagline {
+  animation: brandTaglineFloatUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.76s both;
+}
+
+@keyframes navbarBrandFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brandTextFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brandLogoFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes brandTaglineFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section Subtle Coordinated Entrance */
+.hero-editorial-left {
+  animation: heroContentRise 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.80s both;
+}
+
+.hero-editorial-right {
+  animation: heroFrameRise 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.88s both;
+}
+
+@keyframes heroContentRise {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFrameRise {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -2605,5 +3098,8 @@ ul, ol {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .page-reveal-overlay {
+    display: none !important;
   }
 }

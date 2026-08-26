@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer';
 import CartDrawer from './components/cart/CartDrawer';
 import CustomCursor from './components/interactive/CustomCursor';
 import AmbientCanvas from './components/interactive/AmbientCanvas';
+import PageRevealLoader from './components/interactive/PageRevealLoader';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import CustomStitchingPage from './pages/CustomStitchingPage';
@@ -37,26 +38,32 @@ function StoreLayout({ children }) {
 
 export default function App() {
   return (
-    <Routes>
-      {/* Public Store Routes */}
-      <Route path="/" element={<StoreLayout><HomePage /></StoreLayout>} />
-      <Route path="/products" element={<StoreLayout><ProductsPage /></StoreLayout>} />
-      <Route path="/custom-stitching" element={<StoreLayout><CustomStitchingPage /></StoreLayout>} />
-      <Route path="/wishlist" element={<StoreLayout><WishlistPage /></StoreLayout>} />
+    <>
+      {/* Premium Cinematic Page-Load Reveal Curtain */}
+      <PageRevealLoader />
 
-      {/* Auth Routes */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Routes>
+        {/* Public Store Routes */}
+        <Route path="/" element={<StoreLayout><HomePage /></StoreLayout>} />
+        <Route path="/products" element={<StoreLayout><ProductsPage /></StoreLayout>} />
+        <Route path="/custom-stitching" element={<StoreLayout><CustomStitchingPage /></StoreLayout>} />
+        <Route path="/wishlist" element={<StoreLayout><WishlistPage /></StoreLayout>} />
 
-      {/* Protected Customer Routes */}
-      <Route path="/checkout" element={<StoreLayout><ProtectedRoute><CheckoutPage /></ProtectedRoute></StoreLayout>} />
-      <Route path="/orders" element={<StoreLayout><ProtectedRoute><OrderHistoryPage /></ProtectedRoute></StoreLayout>} />
+        {/* Auth Routes */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
-      {/* Admin Routes */}
-      <Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboardPage /></ProtectedRoute>} />
+        {/* Protected Customer Routes */}
+        <Route path="/checkout" element={<StoreLayout><ProtectedRoute><CheckoutPage /></ProtectedRoute></StoreLayout>} />
+        <Route path="/orders" element={<StoreLayout><ProtectedRoute><OrderHistoryPage /></ProtectedRoute></StoreLayout>} />
 
-      {/* Fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        {/* Admin Routes */}
+        <Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboardPage /></ProtectedRoute>} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }
+

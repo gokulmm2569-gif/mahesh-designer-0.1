@@ -6,47 +6,95 @@ const HERO_LOOKS = [
     id: 1,
     title: 'The Quiet Ceremony',
     tagline: 'Bridal / 2026',
+    desc: 'Handcrafted zardozi borders and heirloom silks designed for the modern ceremony.',
     img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1600',
     studioTag: 'Studio / 01',
     categorySlug: 'bridal-wear',
+    accentColor: '#C85A32', // Studio RHE Terracotta
   },
   {
     id: 2,
     title: 'Lines of Inheritance',
     tagline: 'Traditional / 2025',
+    desc: 'Raw Kanjeevaram weaves re-imagined with structural symmetry and gold filigree.',
     img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1600',
     studioTag: 'Atelier / 02',
     categorySlug: 'designer-blouses',
+    accentColor: '#0D3B2E', // Deep Emerald
   },
   {
     id: 3,
     title: 'Afterlight',
     tagline: 'Modern / 2025',
+    desc: 'Sculpted drape sarees and fluid organza silhouettes engineered for quiet confidence.',
     img: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=1600',
     studioTag: 'Couture / 03',
     categorySlug: 'sarees',
+    accentColor: '#9C7A3C', // Warm Antique Gold
+  },
+  {
+    id: 4,
+    title: 'The Bespoke Drape',
+    tagline: 'Custom / 2026',
+    desc: 'One-of-a-kind patterns tailored precisely to individual proportions and stories.',
+    img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1600',
+    studioTag: 'Bespoke / 04',
+    categorySlug: 'custom-stitching',
+    accentColor: '#8C3A27', // Warm Clay
   }
 ];
 
 export default function HeroSection() {
   const [activeLook, setActiveLook] = useState(0);
+  const [displayedLook, setDisplayedLook] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
   const heroCardRef = useRef(null);
+  const transitionTimerRef = useRef(null);
 
-  // Auto-move image every 5 seconds with fluid progress bar
+  // Trigger Studio RHE Curtain Shutter Wipe Transition
+  const goToLook = (nextIndex) => {
+    if (nextIndex === activeLook || isTransitioning) return;
+    setIsTransitioning(true);
+    setProgress(0);
+    setActiveLook(nextIndex);
+
+    // Halfway through curtain wipe (when frame is fully covered): switch the active content
+    setTimeout(() => {
+      setDisplayedLook(nextIndex);
+    }, 420);
+
+    // When curtain wipe finishes uncovering
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 900);
+  };
+
+  const handleNext = () => {
+    const next = (activeLook + 1) % HERO_LOOKS.length;
+    goToLook(next);
+  };
+
+  const handlePrev = () => {
+    const prev = (activeLook - 1 + HERO_LOOKS.length) % HERO_LOOKS.length;
+    goToLook(prev);
+  };
+
+  // Auto-move image every 5.5s with fluid progress bar
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || isTransitioning) return;
 
     const interval = 50; // update progress every 50ms
-    const totalDuration = 5000;
+    const totalDuration = 5500;
     const step = (interval / totalDuration) * 100;
 
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          setActiveLook((look) => (look + 1) % HERO_LOOKS.length);
+          const next = (activeLook + 1) % HERO_LOOKS.length;
+          goToLook(next);
           return 0;
         }
         return prev + step;
@@ -54,7 +102,7 @@ export default function HeroSection() {
     }, interval);
 
     return () => clearInterval(timer);
-  }, [isPaused, activeLook]);
+  }, [isPaused, isTransitioning, activeLook]);
 
   // Handle 3D Parallax Mouse Move on Hero Portrait Frame
   const handleMouseMove = (e) => {
@@ -62,7 +110,7 @@ export default function HeroSection() {
     const rect = heroCardRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: x * 14, y: -y * 14 });
+    setTilt({ x: x * 12, y: -y * 12 });
   };
 
   const handleMouseLeave = () => {
@@ -70,7 +118,7 @@ export default function HeroSection() {
     setIsPaused(false);
   };
 
-  const current = HERO_LOOKS[activeLook];
+  const current = HERO_LOOKS[displayedLook];
 
   return (
     <section className="hero-editorial-section" id="hero" aria-label="Mahesh Designer Editorial Showcase">
@@ -103,7 +151,7 @@ export default function HeroSection() {
                 <path d="M22 4h-4"></path>
                 <circle cx="4" cy="20" r="2"></circle>
               </svg>
-              <span>INDEPENDENT FASHION DESIGNER</span>
+              <span>INDEPENDENT FASHION ATELIER</span>
             </p>
 
             <h1 className="hero-main-heading">
@@ -113,9 +161,12 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            <p className="hero-narrative-subtext">
-              Mahesh creates considered clothing where Indian craft, modern silhouette, and the person wearing it meet.
-            </p>
+            {/* Dynamic Editorial Narrative Description */}
+            <div className="hero-narrative-box" key={`desc-${displayedLook}`}>
+              <p className="hero-narrative-subtext hero-text-reveal">
+                {current.desc}
+              </p>
+            </div>
 
             {/* High-Fashion Minimalist CTAs */}
             <div className="hero-cta-group">
@@ -147,10 +198,7 @@ export default function HeroSection() {
                   key={look.id}
                   type="button"
                   className={`hero-look-btn ${activeLook === i ? 'active' : ''}`}
-                  onClick={() => {
-                    setActiveLook(i);
-                    setProgress(0);
-                  }}
+                  onClick={() => goToLook(i)}
                   onMouseEnter={() => setIsPaused(true)}
                   onMouseLeave={() => setIsPaused(false)}
                   data-cursor={`0${i + 1}`}
@@ -170,7 +218,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Full-Bleed High-Res Auto-Moving Frame with 3D Spatial Parallax */}
+          {/* Right Column: Studio RHE Full-Bleed Curtain Shutter Frame */}
           <div
             ref={heroCardRef}
             className="hero-editorial-right"
@@ -185,16 +233,33 @@ export default function HeroSection() {
                 transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`
               }}
             >
+              {/* Studio RHE Curtain Shutter Layers */}
+              <div 
+                className={`hero-curtain-container ${isTransitioning ? 'curtain-active' : ''}`} 
+                aria-hidden="true"
+              >
+                <div 
+                  className="hero-curtain-layer curtain-layer-primary" 
+                  style={{ backgroundColor: current.accentColor || '#C85A32' }} 
+                />
+                <div className="hero-curtain-layer curtain-layer-secondary" />
+                <div className="hero-curtain-brand-mark">
+                  <span className="curtain-brand-name">MAHESH</span>
+                  <span className="curtain-look-num">0{activeLook + 1}</span>
+                </div>
+              </div>
+
               {/* Dynamic Image Canvas Layer */}
               {HERO_LOOKS.map((look, index) => (
                 <div
                   key={look.id}
-                  className={`hero-portrait-slide ${activeLook === index ? 'active' : ''}`}
+                  className={`hero-portrait-slide ${displayedLook === index ? 'active' : ''}`}
                 >
                   <img
                     src={look.img}
                     alt={look.title}
                     className="hero-portrait-img"
+                    loading="lazy"
                   />
                   <div className="hero-portrait-scrim" />
                 </div>
@@ -202,15 +267,41 @@ export default function HeroSection() {
 
               {/* Floating Architectural Index Badge */}
               <div className="hero-floating-index-badge">
-                <span className="floating-index-current">0{activeLook + 1}</span>
+                <span className="floating-index-current">0{displayedLook + 1}</span>
                 <span className="floating-index-sep">/</span>
                 <span className="floating-index-total">0{HERO_LOOKS.length}</span>
               </div>
 
-              {/* Minimal Bottom Tag */}
-              <div className="hero-portrait-tag">
+              {/* Interactive Navigation Chevrons */}
+              <div className="hero-frame-nav">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="hero-frame-nav-btn"
+                  aria-label="Previous look"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m15 18-6-6 6-6"/>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="hero-frame-nav-btn"
+                  aria-label="Next look"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m9 18 6-6-6-6"/>
+                  </svg>
+                </button>
+              </div>
+
+              {/* Minimal Bottom Tag with Kinetic Reveal */}
+              <div className="hero-portrait-tag" key={`tag-${displayedLook}`}>
                 <span className="hero-tag-dash" />
-                <span>{current.studioTag} • {current.title}</span>
+                <span className="hero-tag-text-animated">
+                  {current.studioTag} • {current.title}
+                </span>
                 <span className="hero-tag-tagline">[{current.tagline}]</span>
               </div>
             </div>
