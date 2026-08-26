@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const CONFIG_OPTIONS = {
   silhouettes: [
@@ -25,12 +25,25 @@ const CONFIG_OPTIONS = {
 };
 
 export default function LiveAtelierConfigurator() {
+  const { addToCart, setCartOpen } = useCart();
   const [silhouette, setSilhouette] = useState(CONFIG_OPTIONS.silhouettes[0]);
   const [fabric, setFabric] = useState(CONFIG_OPTIONS.fabrics[0]);
   const [neckline, setNeckline] = useState(CONFIG_OPTIONS.necklines[0]);
   const [embroidery, setEmbroidery] = useState(CONFIG_OPTIONS.embroideries[0]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const totalPrice = silhouette.base + fabric.price + neckline.price + embroidery.price;
+
+  const handleAddBespokeToCart = async () => {
+    setIsSubmitting(true);
+    const res = await addToCart(6, 'Custom Fit', 1);
+    setIsSubmitting(false);
+    if (res.success) {
+      setCartOpen(true);
+    } else {
+      alert(res.error || 'Could not add bespoke outfit to bag. Please try again.');
+    }
+  };
 
   return (
     <section className="atelier-configurator-section" id="atelier" aria-label="Interactive Atelier Customizer Preview">
@@ -142,10 +155,10 @@ export default function LiveAtelierConfigurator() {
               <img
                 src={
                   silhouette.id === 'royal-lehenga'
-                    ? 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800'
+                    ? '/images/Screenshot%202026-08-26%20122355.png'
                     : silhouette.id === 'reception-gown'
-                    ? 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800'
-                    : 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800'
+                    ? '/images/Screenshot%202026-08-26%20122320.png'
+                    : '/images/770387738_18098593040578086_6478356792783263711_n.jpg'
                 }
                 alt="Bespoke Blueprint Preview"
                 className="blueprint-img"
@@ -198,14 +211,16 @@ export default function LiveAtelierConfigurator() {
                 </div>
               </div>
 
-              <Link
-                to={`/custom-stitching?silhouette=${silhouette.id}&fabric=${encodeURIComponent(fabric.name)}&neckline=${encodeURIComponent(neckline.name)}&embroidery=${encodeURIComponent(embroidery.name)}`}
+              <button
+                type="button"
+                onClick={handleAddBespokeToCart}
+                disabled={isSubmitting}
                 className="btn btn-primary btn-lg w-full magnetic-btn"
-                style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
-                data-cursor="MEASURE"
+                style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: 'none', cursor: 'pointer' }}
+                data-cursor="ADD"
               >
-                <span>🪡</span> Submit My Exact Measurements →
-              </Link>
+                <span>🪡</span> {isSubmitting ? 'Adding Custom Outfit...' : 'Add Bespoke Outfit to Bag →'}
+              </button>
             </div>
           </div>
         </div>

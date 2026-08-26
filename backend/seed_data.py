@@ -77,7 +77,7 @@ def seed():
                 "is_customizable": True,
                 "stock": 15,
                 "sizes": ["XS", "S", "M", "L", "XL", "Custom Fit"],
-                "image_url": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600"
+                "image_url": "/uploads/770387738_18098593040578086_6478356792783263711_n.jpg"
             },
             {
                 "name": "Golden Hour Zari Lehenga",
@@ -94,7 +94,7 @@ def seed():
                 "is_customizable": True,
                 "stock": 5,
                 "sizes": ["XS", "S", "M", "L", "XL", "Custom Fit"],
-                "image_url": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600"
+                "image_url": "/uploads/Screenshot_26-8-2026_115914_www.instagram.com.jpeg"
             },
             {
                 "name": "Midnight Rose Reception Gown",
@@ -111,7 +111,7 @@ def seed():
                 "is_customizable": True,
                 "stock": 8,
                 "sizes": ["XS", "S", "M", "L", "XL", "Custom Fit"],
-                "image_url": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600"
+                "image_url": "/uploads/780070284_18100128413578086_122324511139491431_n.jpg"
             },
             {
                 "name": "Sunset Embroidered Party Saree",
@@ -128,7 +128,7 @@ def seed():
                 "is_customizable": False,
                 "stock": 12,
                 "sizes": ["Free Size"],
-                "image_url": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600"
+                "image_url": "/uploads/Screenshot%202026-08-26%20115803.png"
             },
             {
                 "name": "Floral Mirror Work Kurti",
@@ -145,7 +145,7 @@ def seed():
                 "is_customizable": True,
                 "stock": 25,
                 "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
-                "image_url": "https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?w=600"
+                "image_url": "/uploads/Screenshot%202026-08-26%20121947.png"
             },
             {
                 "name": "Bespoke Bridal Couture Package",
@@ -162,7 +162,7 @@ def seed():
                 "is_customizable": True,
                 "stock": 10,
                 "sizes": ["Custom Fit"],
-                "image_url": "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=600"
+                "image_url": "/uploads/Screenshot_26-8-2026_115639_www.instagram.com.jpeg"
             },
             {
                 "name": "Heritage Silk Fabric (Per Meter)",
@@ -179,7 +179,7 @@ def seed():
                 "is_customizable": False,
                 "stock": 50,
                 "sizes": ["0.5m", "1m", "1.5m", "2m", "Custom Length"],
-                "image_url": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600"
+                "image_url": "/uploads/771757318_18098730095578086_4773276763468998885_n.jpg"
             },
             {
                 "name": "Champagne Sequin Cocktail Blouse",
@@ -196,7 +196,7 @@ def seed():
                 "is_customizable": True,
                 "stock": 10,
                 "sizes": ["XS", "S", "M", "L", "XL", "Custom Fit"],
-                "image_url": "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=600"
+                "image_url": "/uploads/Screenshot%202026-08-26%20122249.png"
             },
         ]
 

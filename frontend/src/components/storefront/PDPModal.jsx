@@ -31,14 +31,14 @@ export default function PDPModal({ product, onClose }) {
   const primaryImg =
     product.images?.find((i) => i.is_primary)?.image_url ||
     product.images?.[0]?.image_url ||
-    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1000';
+    'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=85';
 
   const allImages = product.images && product.images.length > 0
     ? product.images.map(img => img.image_url)
     : [
         primaryImg,
-        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800',
-        'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800'
+        'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=85',
+        'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=800&q=85'
       ];
 
   const [activeImg, setActiveImg] = useState(primaryImg);

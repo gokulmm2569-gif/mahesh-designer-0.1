@@ -49,9 +49,9 @@ export default function Footer() {
           <div>
             <div className="footer-col-title">Custom Tailoring</div>
             <ul className="footer-links">
-              <li><Link to="/custom-stitching" data-cursor="STUDIO">🪡 Custom Stitching Studio</Link></li>
-              <li><Link to="/custom-stitching" data-cursor="MEASURE">Live Measurement Matrix</Link></li>
-              <li><Link to="/custom-stitching" data-cursor="EMBROIDER">Aari & Zardozi Customization</Link></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="STUDIO">🪡 Custom Stitching Studio</a></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="MEASURE">Live Measurement Matrix</a></li>
+              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="EMBROIDER">Aari & Zardozi Customization</a></li>
               <li><Link to="/orders" data-cursor="ORDERS">Order Tracking & Dispatch</Link></li>
               <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="BLUEPRINT">Live Bespoke Tailoring Blueprint</a></li>
             </ul>

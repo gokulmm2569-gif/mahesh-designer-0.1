@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 
 const HERO_LOOKS = [
   {
@@ -7,40 +6,40 @@ const HERO_LOOKS = [
     title: 'The Quiet Ceremony',
     tagline: 'Bridal / 2026',
     desc: 'Handcrafted zardozi borders and heirloom silks designed for the modern ceremony.',
-    img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1600',
+    img: '/images/Screenshot_26-8-2026_115914_www.instagram.com.jpeg',
     studioTag: 'Studio / 01',
     categorySlug: 'bridal-wear',
-    accentColor: '#C85A32', // Studio RHE Terracotta
+    accentColor: '#8B1E2D', // Mahesh Royal Crimson Red
   },
   {
     id: 2,
     title: 'Lines of Inheritance',
     tagline: 'Traditional / 2025',
-    desc: 'Raw Kanjeevaram weaves re-imagined with structural symmetry and gold filigree.',
-    img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1600',
+    desc: 'Deep wine & sage green Kanjeevaram weaves re-imagined with structural symmetry and gold filigree.',
+    img: '/images/780070284_18100128413578086_122324511139491431_n.jpg',
     studioTag: 'Atelier / 02',
     categorySlug: 'designer-blouses',
-    accentColor: '#0D3B2E', // Deep Emerald
+    accentColor: '#3A0D18', // Deep Velvet Wine
   },
   {
     id: 3,
-    title: 'Afterlight',
-    tagline: 'Modern / 2025',
-    desc: 'Sculpted drape sarees and fluid organza silhouettes engineered for quiet confidence.',
-    img: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=1600',
+    title: 'Imperial Velvet & Champagne',
+    tagline: 'Modern / 2026',
+    desc: 'Royal velvet blue embroidered crop top paired with champagne silver zari flared lehenga.',
+    img: '/images/Screenshot%202026-08-26%20122249.png',
     studioTag: 'Couture / 03',
-    categorySlug: 'sarees',
-    accentColor: '#9C7A3C', // Warm Antique Gold
+    categorySlug: 'reception-gowns',
+    accentColor: '#176B55', // Deep Emerald Accent
   },
   {
     id: 4,
     title: 'The Bespoke Drape',
     tagline: 'Couture / 2026',
-    desc: 'One-of-a-kind patterns tailored precisely to individual proportions and stories.',
-    img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1600',
+    desc: 'Ruby red dupatta paired with pastel floral embroidered skirt collar detailing.',
+    img: '/images/Screenshot%202026-08-26%20122156.png',
     studioTag: 'Couture / 04',
-    categorySlug: 'sarees',
-    accentColor: '#8C3A27', // Warm Clay
+    categorySlug: 'customized-outfits',
+    accentColor: '#C9A227', // Warm Antique Gold
   }
 ];
 
@@ -186,9 +185,17 @@ export default function HeroSection() {
                 </svg>
               </a>
 
-              <Link to="/products" className="btn-vercel-secondary magnetic-btn" data-cursor="PRODUCTS">
+              <a
+                href="#collections"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn-vercel-secondary magnetic-btn"
+                data-cursor="PRODUCTS"
+              >
                 <span>View Products</span>
-              </Link>
+              </a>
             </div>
 
             {/* Interactive Lookbook Switcher Dots with Animated Progress */}

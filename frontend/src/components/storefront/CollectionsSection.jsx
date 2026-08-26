@@ -30,8 +30,8 @@ const FASHION_CATEGORIES = [
     num: '04',
     title: 'Custom',
     subtitle: 'Made around you',
-    slug: '/custom-stitching',
-    isCustom: true,
+    target: 'atelier',
+    isCustom: false,
     tag: 'BESPOKE'
   }
 ];
@@ -42,7 +42,7 @@ const SELECTED_COLLECTIONS = [
     index: '01',
     title: 'The Quiet Ceremony',
     tag: 'Bridal / 2026',
-    img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1000',
+    img: '/images/780070284_18100128413578086_122324511139491431_n.jpg',
     slug: 'bridal-wear',
     stagger: false,
     aspect: 'portrait'
@@ -52,7 +52,7 @@ const SELECTED_COLLECTIONS = [
     index: '02',
     title: 'Lines of Inheritance',
     tag: 'Traditional / 2025',
-    img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1000',
+    img: '/images/Screenshot%202026-08-26%20122048.png',
     slug: 'designer-blouses',
     stagger: true,
     aspect: 'square'
@@ -60,9 +60,9 @@ const SELECTED_COLLECTIONS = [
   {
     id: 3,
     index: '03',
-    title: 'Afterlight',
-    tag: 'Modern / 2025',
-    img: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=1000',
+    title: 'Lavender & Pistachio Drape',
+    tag: 'Modern / 2026',
+    img: '/images/Screenshot%202026-08-26%20121947.png',
     slug: 'sarees',
     stagger: false,
     aspect: 'portrait'
@@ -73,11 +73,11 @@ const SERVICES = [
   {
     num: '01',
     name: 'Custom clothing',
-    link: '/custom-stitching',
-    isRouter: true,
+    target: 'atelier',
+    isRouter: false,
     tag: 'STUDIO',
     cursor: 'CUSTOM',
-    previewImg: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80'
+    previewImg: '/images/Screenshot%202026-08-26%20115803.png'
   },
   {
     num: '02',
@@ -86,7 +86,7 @@ const SERVICES = [
     isRouter: false,
     tag: 'CEREMONY',
     cursor: 'BRIDAL',
-    previewImg: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800&auto=format&fit=crop&q=80'
+    previewImg: '/images/Screenshot_26-8-2026_115914_www.instagram.com.jpeg'
   },
   {
     num: '03',
@@ -95,7 +95,7 @@ const SERVICES = [
     isRouter: false,
     tag: 'WEAVES',
     cursor: 'HERITAGE',
-    previewImg: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=800&auto=format&fit=crop&q=80'
+    previewImg: '/images/771757318_18098730095578086_4773276763468998885_n.jpg'
   },
   {
     num: '04',
@@ -104,7 +104,7 @@ const SERVICES = [
     isRouter: false,
     tag: 'ATELIER',
     cursor: 'COUTURE',
-    previewImg: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&auto=format&fit=crop&q=80'
+    previewImg: '/images/Screenshot%202026-08-26%20122438.png'
   }
 ];
 
@@ -203,8 +203,12 @@ export default function CollectionsSection() {
             </a>
 
             {/* Custom */}
-            <Link
-              to="/custom-stitching"
+            <a
+              href="#atelier"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo('atelier');
+              }}
               className="category-strip-item group is-custom-highlight"
               data-cursor="STUDIO"
             >
@@ -222,7 +226,7 @@ export default function CollectionsSection() {
                   <path d="M7 17 17 7"></path>
                 </svg>
               </div>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -296,13 +300,21 @@ export default function CollectionsSection() {
               <p className="practice-quote-subtext">
                 From the first sketch to the final fitting, every Mahesh piece is built through conversation, craft, and a belief that elegance should feel like you.
               </p>
-              <Link to="/custom-stitching" className="practice-quote-cta magnetic-btn" data-cursor="CONNECT">
+              <a
+                href="#atelier"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo('atelier');
+                }}
+                className="practice-quote-cta magnetic-btn"
+                data-cursor="CONNECT"
+              >
                 <span>Start a conversation</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="cta-arrow-icon">
                   <path d="M7 7h10v10"></path>
                   <path d="M7 17 17 7"></path>
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -324,7 +336,7 @@ export default function CollectionsSection() {
                 {/* Vertical Auto-Scrolling Track */}
                 <div 
                   className="services-preview-track"
-                  style={{ transform: `translateY(-${activeService * 100}%)` }}
+                  style={{ transform: `translateY(-${activeService * (100 / SERVICES.length)}%)` }}
                 >
                   {SERVICES.map((srv, idx) => (
                     <div 

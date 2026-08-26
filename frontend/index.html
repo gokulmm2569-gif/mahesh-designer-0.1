@@ -20,16 +20,12 @@
         width: 100vw;
         height: 100vh;
         z-index: 999999;
-        pointer-events: auto;
+        pointer-events: none;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #051A14;
-      }
-
-      #initial-page-reveal.is-revealed {
-        pointer-events: none;
+        background: transparent !important;
       }
 
       .reveal-panels-container {
@@ -43,6 +39,7 @@
         display: flex;
         flex-direction: row;
         pointer-events: none;
+        background: transparent !important;
       }
 
       .reveal-panel {
@@ -51,6 +48,7 @@
         position: relative;
         will-change: transform;
         transform: translateY(0);
+        margin-right: -0.5px;
       }
 
       .reveal-panel.panel-1 { background: #051A14; }
@@ -80,7 +78,7 @@
       }
 
       #initial-page-reveal.is-revealing .reveal-panel {
-        animation: panelRiseUp 1.15s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        animation: panelRiseUp 0.92s cubic-bezier(0.76, 0, 0.24, 1) forwards;
         animation-delay: var(--panel-delay, 0ms);
       }
 
@@ -104,6 +102,7 @@
         justify-content: center;
         z-index: 10;
         pointer-events: none;
+        background: transparent !important;
       }
 
       .reveal-brand-lockup {
@@ -113,13 +112,13 @@
         align-items: center;
         justify-content: center;
         padding: 24px;
-        animation: revealCrestEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: revealCrestEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
       @keyframes revealCrestEnter {
         0% {
           opacity: 0;
-          transform: translateY(24px);
+          transform: translateY(20px);
         }
         100% {
           opacity: 1;
@@ -128,7 +127,7 @@
       }
 
       #initial-page-reveal.is-revealing .reveal-brand-lockup {
-        animation: revealCrestExit 0.75s cubic-bezier(0.76, 0, 0.24, 1) 0.22s forwards;
+        animation: revealCrestExit 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.12s forwards;
       }
 
       @keyframes revealCrestExit {
@@ -138,7 +137,7 @@
         }
         100% {
           opacity: 0;
-          transform: translateY(-36px);
+          transform: translateY(-32px);
         }
       }
 
@@ -248,19 +247,19 @@
           <div class="panel-inner-glow"></div>
           <div class="panel-border-line"></div>
         </div>
-        <div class="reveal-panel panel-2" style="--panel-delay: 85ms">
+        <div class="reveal-panel panel-2" style="--panel-delay: 60ms">
           <div class="panel-inner-glow"></div>
           <div class="panel-border-line"></div>
         </div>
-        <div class="reveal-panel panel-3" style="--panel-delay: 170ms">
+        <div class="reveal-panel panel-3" style="--panel-delay: 120ms">
           <div class="panel-inner-glow"></div>
           <div class="panel-border-line"></div>
         </div>
-        <div class="reveal-panel panel-4" style="--panel-delay: 255ms">
+        <div class="reveal-panel panel-4" style="--panel-delay: 180ms">
           <div class="panel-inner-glow"></div>
           <div class="panel-border-line"></div>
         </div>
-        <div class="reveal-panel panel-5" style="--panel-delay: 340ms">
+        <div class="reveal-panel panel-5" style="--panel-delay: 240ms">
           <div class="panel-inner-glow"></div>
           <div class="panel-border-line"></div>
         </div>
@@ -300,7 +299,7 @@
       (function() {
         if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           var overlay = document.getElementById('initial-page-reveal');
-          if (overlay) overlay.remove();
+          if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
           return;
         }
 
@@ -312,15 +311,12 @@
             el.classList.add('is-revealing');
           });
 
-          setTimeout(function() {
-            if (el) el.classList.add('is-revealed');
-          }, 1450);
-
+          // Unmount immediately when last panel clears (240ms delay + 920ms animation = 1160ms)
           setTimeout(function() {
             if (el && el.parentNode) {
               el.parentNode.removeChild(el);
             }
-          }, 1700);
+          }, 1200);
         }
 
         if (document.readyState === 'loading') {

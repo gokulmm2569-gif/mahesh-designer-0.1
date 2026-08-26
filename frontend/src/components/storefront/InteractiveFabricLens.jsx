@@ -4,39 +4,40 @@ import { Link } from 'react-router-dom';
 const FABRIC_SWATCHES = [
   {
     id: 'aari-silk',
-    name: 'Antique Gold Aari Embroidery on Raw Silk',
-    subtitle: 'Hand-guided needlework with 24K electroplated Zari & pearls',
-    img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1400',
-    origin: 'Kanchipuram, Tamil Nadu',
-    density: '480,000 Micro Stitches',
+    name: 'Mustard Yellow Scalloped Aari Embroidery on Raw Silk',
+    subtitle: 'Hand-guided needlework with peacock motif, sequin & multi-color resham thread',
+    img: '/images/771757318_18098730095578086_4773276763468998885_n.jpg',
+    origin: 'Mahesh Designer Atelier, T. Nagar, Chennai',
+    density: '520,000 Micro Stitches',
     hotspots: [
-      { top: '35%', left: '42%', title: 'Hand-turned Zari Floral Petals', detail: 'Crafted with master needle precision' },
-      { top: '65%', left: '60%', title: 'Pure Raw Mulberry Silk Warp', detail: '100% genuine cocoon silk base' },
-      { top: '25%', left: '70%', title: 'Cutdana Glass Beading', detail: 'Imported micro-bead embellishments' }
+      { top: '35%', left: '42%', title: 'Scalloped Neckline Border', detail: 'Intricate floral motif with purple & gold resham' },
+      { top: '65%', left: '20%', title: 'Hand-Embroidered Peacock Sleeve', detail: '3D moti, sequence and zari work peacock' },
+      { top: '25%', left: '70%', title: 'Pure Kanjeevaram Silk Base', detail: '100% genuine woven raw silk fabric' }
     ]
   },
   {
-    id: 'kanjivaram-korvai',
-    name: 'Temple Korvai Pure Silk Zari Weave',
-    subtitle: 'Interlocked border technique woven on authentic pit looms',
-    img: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=1400',
-    origin: 'Heritage Weavers Guild',
-    density: '3-Ply Silk Warp & Weft',
+    id: 'blush-pink-coat',
+    name: 'Blush Pink Coat-Collar Zari Aari Blouse & Pleated Skirt',
+    subtitle: 'High-fashion coat collar embroidery featuring official Mahesh Designer brand hallmark',
+    img: '/images/Screenshot_26-8-2026_115413_www.instagram.com.jpeg',
+    origin: 'Mahesh Designer Signature Vault',
+    density: 'Coat Collar Zardozi Relief',
     hotspots: [
-      { top: '40%', left: '30%', title: 'Mayil (Peacock) Motif', detail: 'Symbol of auspicious royal heritage' },
-      { top: '60%', left: '75%', title: 'Pure Silver Zari Dipped in Gold', detail: 'Hallmarked heavy border density' }
+      { top: '20%', left: '75%', title: 'Embroidered Collar Lapel', detail: 'Gold zari floral vine embroidery' },
+      { top: '15%', left: '73%', title: 'Mahesh Designer Brand Label', detail: 'Authentic hallmark tag on inner neckline' },
+      { top: '60%', left: '30%', title: 'Zari Pleated Silk Skirt', detail: 'Golden jacquard brocade border pleats' }
     ]
   },
   {
-    id: 'velvet-zardozi',
-    name: 'Imperial Emerald Micro Velvet with Zardozi',
-    subtitle: 'Plush bridal velvet with heavy metallic french wire relief',
-    img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1400',
-    origin: 'Atelier Signature Vault',
-    density: 'High-relief 3D wirework',
+    id: 'peacock-pink-aari',
+    name: 'Royal Magenta & Deep Purple Peacock Aari Work Blouse',
+    subtitle: 'Heavy bridal Aari back-neck keyhole cut with peacock feather handwork',
+    img: '/images/770387738_18098593040578086_6478356792783263711_n.jpg',
+    origin: 'Handcrafted by Master Artisans',
+    density: 'High-density sequin & cutdana relief',
     hotspots: [
-      { top: '30%', left: '50%', title: 'Dabka & Salma Wirework', detail: 'Intricate coiled metallic threading' },
-      { top: '70%', left: '40%', title: 'Emerald Velvet Luster', detail: 'Deep jewel tone light refraction' }
+      { top: '45%', left: '60%', title: 'Teardrop Back Keyhole', detail: 'Beaded rim with scalloped zardozi border' },
+      { top: '60%', left: '35%', title: '3D Sequin Peacock Motif', detail: 'Layered purple sequins & metallic threads' }
     ]
   }
 ];
@@ -227,9 +228,18 @@ export default function InteractiveFabricLens() {
 
             {/* Action Triggers */}
             <div style={{ display: 'flex', gap: 'var(--space-4)', marginTop: 'var(--space-6)' }}>
-              <Link to="/custom-stitching" className="btn btn-gold btn-lg" style={{ flex: 1, textAlign: 'center' }} data-cursor="STITCH">
+              <a
+                href="#atelier"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn btn-gold btn-lg"
+                style={{ flex: 1, textAlign: 'center' }}
+                data-cursor="STITCH"
+              >
                 🪡 Stitch With This Fabric →
-              </Link>
+              </a>
               <a
                 href="#collections"
                 onClick={(e) => {

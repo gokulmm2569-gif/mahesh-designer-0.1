@@ -24,7 +24,7 @@ export default function ProductCard({ product }) {
   const primaryImg =
     product.images?.find((i) => i.is_primary)?.image_url ||
     product.images?.[0]?.image_url ||
-    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800';
+    'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85';
 
   const price = parseFloat(product.discount_price || product.original_price || 0);
   const origPrice = parseFloat(product.original_price || 0);
