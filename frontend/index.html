@@ -7,11 +7,330 @@
     <meta name="keywords" content="Full Stack Developer, React, Python, FastAPI, Django, JavaScript, Three.js, WebGL, Creative Portfolio" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
     <title>Gokul M — Full Stack Developer | Creative Portfolio</title>
+    <style>
+      /* Critical Instant Zero-FOUC Page Reveal Overlay */
+      #initial-page-reveal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 999999;
+        pointer-events: auto;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #051A14;
+      }
+
+      #initial-page-reveal.is-revealed {
+        pointer-events: none;
+      }
+
+      .reveal-panels-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        pointer-events: none;
+      }
+
+      .reveal-panel {
+        flex: 1;
+        height: 100%;
+        position: relative;
+        will-change: transform;
+        transform: translateY(0);
+      }
+
+      .reveal-panel.panel-1 { background: #051A14; }
+      .reveal-panel.panel-2 { background: #092C22; }
+      .reveal-panel.panel-3 { background: #0D3B2E; }
+      .reveal-panel.panel-4 { background: #124335; }
+      .reveal-panel.panel-5 { background: #061F18; }
+
+      .reveal-panel .panel-border-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 1px;
+        background: linear-gradient(180deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(212, 175, 55, 0.25) 100%);
+        pointer-events: none;
+      }
+
+      .reveal-panel .panel-inner-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(ellipse at 50% 60%, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      #initial-page-reveal.is-revealing .reveal-panel {
+        animation: panelRiseUp 1.15s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        animation-delay: var(--panel-delay, 0ms);
+      }
+
+      @keyframes panelRiseUp {
+        0% {
+          transform: translateY(0%);
+        }
+        100% {
+          transform: translateY(-101%);
+        }
+      }
+
+      .reveal-content-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .reveal-brand-lockup {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        animation: revealCrestEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes revealCrestEnter {
+        0% {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #initial-page-reveal.is-revealing .reveal-brand-lockup {
+        animation: revealCrestExit 0.75s cubic-bezier(0.76, 0, 0.24, 1) 0.22s forwards;
+      }
+
+      @keyframes revealCrestExit {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-36px);
+        }
+      }
+
+      .reveal-crest-wrapper {
+        position: relative;
+        margin-bottom: 16px;
+      }
+
+      .reveal-crest-ring {
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(7, 38, 30, 0.9) 0%, rgba(13, 59, 46, 0.95) 100%);
+        border: 1.5px solid #D4AF37;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+      }
+
+      .reveal-crest-monogram {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #D4AF37;
+        letter-spacing: 0.05em;
+      }
+
+      .reveal-crest-accent-star {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        font-size: 12px;
+        color: #F3E5AB;
+        text-shadow: 0 0 10px rgba(243, 229, 171, 0.8);
+      }
+
+      .reveal-title-mask {
+        overflow: hidden;
+        margin-bottom: 8px;
+      }
+
+      .reveal-brand-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(2rem, 5.5vw, 3.8rem);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        line-height: 1.1;
+        text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+      }
+
+      .reveal-title-spacer {
+        display: inline-block;
+        width: 0.3em;
+      }
+
+      .reveal-gold-accent {
+        color: #D4AF37;
+      }
+
+      .reveal-subtitle-mask {
+        overflow: hidden;
+      }
+
+      .reveal-brand-subtitle {
+        font-family: 'DM Mono', monospace;
+        font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(243, 229, 171, 0.85);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .reveal-dot-separator {
+        color: #D4AF37;
+        font-size: 0.6em;
+      }
+
+      .reveal-line-wrapper {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .reveal-gold-line {
+        width: 80px;
+        height: 1.5px;
+        background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #initial-page-reveal {
+          display: none !important;
+        }
+      }
+    </style>
   </head>
   <body>
+    <!-- 100% Critical Instant Zero-FOUC Opening Reveal Curtain -->
+    <div id="initial-page-reveal" class="page-reveal-overlay" aria-hidden="true">
+      <div class="reveal-panels-container">
+        <div class="reveal-panel panel-1" style="--panel-delay: 0ms">
+          <div class="panel-inner-glow"></div>
+          <div class="panel-border-line"></div>
+        </div>
+        <div class="reveal-panel panel-2" style="--panel-delay: 85ms">
+          <div class="panel-inner-glow"></div>
+          <div class="panel-border-line"></div>
+        </div>
+        <div class="reveal-panel panel-3" style="--panel-delay: 170ms">
+          <div class="panel-inner-glow"></div>
+          <div class="panel-border-line"></div>
+        </div>
+        <div class="reveal-panel panel-4" style="--panel-delay: 255ms">
+          <div class="panel-inner-glow"></div>
+          <div class="panel-border-line"></div>
+        </div>
+        <div class="reveal-panel panel-5" style="--panel-delay: 340ms">
+          <div class="panel-inner-glow"></div>
+          <div class="panel-border-line"></div>
+        </div>
+      </div>
+      <div class="reveal-content-container">
+        <div class="reveal-brand-lockup">
+          <div class="reveal-crest-wrapper">
+            <div class="reveal-crest-ring">
+              <span class="reveal-crest-monogram">MD</span>
+            </div>
+            <div class="reveal-crest-accent-star">✦</div>
+          </div>
+          <div class="reveal-title-mask">
+            <h1 class="reveal-brand-title">
+              <span>MAHESH</span>
+              <span class="reveal-title-spacer"> </span>
+              <span class="reveal-gold-accent">DESIGNER</span>
+            </h1>
+          </div>
+          <div class="reveal-subtitle-mask">
+            <p class="reveal-brand-subtitle">
+              <span>MODERN INDIAN COUTURE</span>
+              <span class="reveal-dot-separator">•</span>
+              <span>ATELIER SPEC 2026</span>
+            </p>
+          </div>
+          <div class="reveal-line-wrapper">
+            <div class="reveal-gold-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
+
+    <script>
+      (function() {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          var overlay = document.getElementById('initial-page-reveal');
+          if (overlay) overlay.remove();
+          return;
+        }
+
+        function triggerReveal() {
+          var el = document.getElementById('initial-page-reveal');
+          if (!el) return;
+          
+          requestAnimationFrame(function() {
+            el.classList.add('is-revealing');
+          });
+
+          setTimeout(function() {
+            if (el) el.classList.add('is-revealed');
+          }, 1450);
+
+          setTimeout(function() {
+            if (el && el.parentNode) {
+              el.parentNode.removeChild(el);
+            }
+          }, 1700);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', triggerReveal);
+        } else {
+          triggerReveal();
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+

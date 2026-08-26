@@ -35,11 +35,11 @@ const HERO_LOOKS = [
   {
     id: 4,
     title: 'The Bespoke Drape',
-    tagline: 'Custom / 2026',
+    tagline: 'Couture / 2026',
     desc: 'One-of-a-kind patterns tailored precisely to individual proportions and stories.',
     img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1600',
-    studioTag: 'Bespoke / 04',
-    categorySlug: 'custom-stitching',
+    studioTag: 'Couture / 04',
+    categorySlug: 'sarees',
     accentColor: '#8C3A27', // Warm Clay
   }
 ];
@@ -186,8 +186,8 @@ export default function HeroSection() {
                 </svg>
               </a>
 
-              <Link to="/custom-stitching" className="btn-vercel-secondary magnetic-btn" data-cursor="STUDIO">
-                <span>The Bespoke Studio</span>
+              <Link to="/products" className="btn-vercel-secondary magnetic-btn" data-cursor="PRODUCTS">
+                <span>View Products</span>
               </Link>
             </div>
 

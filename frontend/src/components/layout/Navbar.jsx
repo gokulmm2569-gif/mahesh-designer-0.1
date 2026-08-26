@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -77,7 +77,7 @@ export default function Navbar() {
     { label: 'Velvet Lehengas', query: 'lehenga' },
     { label: 'Reception Gowns', query: 'gown' },
     { label: 'Kalidar Anarkali', query: 'anarkali' },
-    { label: 'Custom Sizing', query: 'custom' },
+    { label: 'Haute Couture', query: 'couture' },
   ];
 
   const handleNavClick = (e, targetId) => {
@@ -146,15 +146,6 @@ export default function Navbar() {
               >
                 Home
               </a>
-
-              {/* Glowing Pulse Custom Stitching Button */}
-              <NavLink to="/custom-stitching" className="nav-stitching-btn" data-cursor="STUDIO">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/>
-                  <line x1="4" y1="21" x2="20" y2="21"/>
-                </svg>
-                <span>Custom Stitching</span>
-              </NavLink>
             </div>
 
             {/* Right Action Icons & Gateway */}
@@ -251,7 +242,7 @@ export default function Navbar() {
                         </Link>
                       )}
                       <Link to="/orders" className="btn btn-ghost btn-sm" style={{ justifyContent: 'flex-start' }} onClick={() => setUserDropdownOpen(false)}>
-                        📦 Orders & Stitching Status
+                        📦 Orders & Purchases
                       </Link>
                       <Link to="/wishlist" className="btn btn-ghost btn-sm" style={{ justifyContent: 'flex-start' }} onClick={() => setUserDropdownOpen(false)}>
                         ♡ Saved Wishlist ({wishlistCount})
@@ -280,11 +271,8 @@ export default function Navbar() {
           {mobileMenuOpen && (
             <div className="mobile-nav-drawer">
               <a href="#hero" className="btn btn-ghost" style={{ justifyContent: 'flex-start' }} onClick={(e) => handleNavClick(e, 'hero')}>Home</a>
-              <NavLink to="/custom-stitching" className="btn btn-gold" style={{ justifyContent: 'center', borderRadius: 'var(--radius-full)' }} onClick={() => setMobileMenuOpen(false)}>
-                🪡 Launch Custom Stitching Studio
-              </NavLink>
               <button onClick={() => { setMobileMenuOpen(false); setConsultModalOpen(true); }} className="btn btn-outline" style={{ justifyContent: 'center', borderRadius: 'var(--radius-full)' }}>
-                📅 Book Video Fitting Session
+                📅 Book Video Consultation
               </button>
             </div>
           )}
@@ -352,19 +340,19 @@ export default function Navbar() {
                   <span style={{ fontSize: '1.3rem' }}>👗</span>
                   <div>
                     <div style={{ fontSize: '12px', fontWeight: 700 }}>Bridal Lehengas</div>
-                    <div style={{ fontSize: '10px', color: 'var(--clr-slate)' }}>Custom Stitched</div>
+                    <div style={{ fontSize: '10px', color: 'var(--clr-slate)' }}>Haute Couture</div>
                   </div>
                 </Link>
 
                 <Link
-                  to="/custom-stitching"
+                  to="/products?category=sarees"
                   onClick={() => setSearchOpen(false)}
                   className="spotlight-category-tile is-atelier-tile"
                 >
-                  <span style={{ fontSize: '1.3rem' }}>🪡</span>
+                  <span style={{ fontSize: '1.3rem' }}>✨</span>
                   <div>
-                    <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--clr-emerald-dark)' }}>Custom Atelier</div>
-                    <div style={{ fontSize: '10px', color: 'var(--clr-gold-dark)' }}>Live Quote Studio</div>
+                    <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--clr-emerald-dark)' }}>Silk Sarees</div>
+                    <div style={{ fontSize: '10px', color: 'var(--clr-gold-dark)' }}>Heirloom Weaves</div>
                   </div>
                 </Link>
               </div>
