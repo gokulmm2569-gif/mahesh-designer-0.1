@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import VideoSegmentPlayer from '../interactive/VideoSegmentPlayer';
 
 const FASHION_CATEGORIES = [
   {
@@ -43,6 +44,7 @@ const SELECTED_COLLECTIONS = [
     title: 'The Quiet Ceremony',
     tag: 'Bridal / 2026',
     img: '/images/780070284_18100128413578086_122324511139491431_n.jpg',
+    videoSrc: '/videos/bridal-blouse-1113.mp4',
     slug: 'bridal-wear',
     stagger: false,
     aspect: 'portrait'
@@ -53,6 +55,7 @@ const SELECTED_COLLECTIONS = [
     title: 'Lines of Inheritance',
     tag: 'Traditional / 2025',
     img: '/images/Screenshot%202026-08-26%20122048.png',
+    videoSrc: '/videos/featured-lehenga-87768.mp4',
     slug: 'designer-blouses',
     stagger: true,
     aspect: 'square'
@@ -63,6 +66,7 @@ const SELECTED_COLLECTIONS = [
     title: 'Lavender & Pistachio Drape',
     tag: 'Modern / 2026',
     img: '/images/Screenshot%202026-08-26%20121947.png',
+    videoSrc: '/videos/atelier-97057.mp4',
     slug: 'sarees',
     stagger: false,
     aspect: 'portrait'
@@ -262,12 +266,20 @@ export default function CollectionsSection() {
                 data-cursor="EXPLORE"
               >
                 <div className="selected-work-img-wrap">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="selected-work-img"
-                    loading="lazy"
-                  />
+                  {item.videoSrc ? (
+                    <VideoSegmentPlayer
+                      src={item.videoSrc}
+                      poster={item.img}
+                      className="selected-work-img"
+                    />
+                  ) : (
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="selected-work-img"
+                      loading="lazy"
+                    />
+                  )}
                   {/* Subtle Spatial Hover Card Scrim */}
                   <div className="selected-work-hover-overlay">
                     <span className="selected-work-hover-tag">OPEN LOOKBOOK</span>

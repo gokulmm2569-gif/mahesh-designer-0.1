@@ -1,31 +1,42 @@
 import { useState, useEffect } from 'react';
 
+let hasGlobalLoaderExecuted = false;
+
 export default function PageRevealLoader({ onComplete }) {
-  const [animationState, setAnimationState] = useState('initial'); // 'initial' -> 'animating' -> 'revealed' -> 'done'
+  const [animationState, setAnimationState] = useState(() => {
+    // If loader has already executed once in this session, initialize directly to 'done' (return null)
+    if (hasGlobalLoaderExecuted || typeof window === 'undefined') {
+      return 'done';
+    }
+    hasGlobalLoaderExecuted = true;
+    return 'initial';
+  });
 
   useEffect(() => {
-    // 0.08s: Trigger bottom-to-top staggered panel rise
+    if (animationState === 'done') return;
+
+    // 0.8s: Trigger 5-column bottom-to-top panel reveal animation
     const startTimer = setTimeout(() => {
       setAnimationState('animating');
-    }, 80);
+    }, 800);
 
-    // 1.45s: Staggered panels fully clear the viewport; website is revealed
+    // 1.80s: Staggered panels clear the viewport; website is fully revealed underneath
     const revealTimer = setTimeout(() => {
       setAnimationState('revealed');
       if (onComplete) onComplete();
-    }, 1450);
+    }, 1800);
 
-    // 1.70s: Fully unmount overlay after all motion settles
+    // 2.20s: Unmount loader overlay cleanly from DOM
     const cleanupTimer = setTimeout(() => {
       setAnimationState('done');
-    }, 1700);
+    }, 2200);
 
     return () => {
       clearTimeout(startTimer);
       clearTimeout(revealTimer);
       clearTimeout(cleanupTimer);
     };
-  }, [onComplete]);
+  }, [onComplete, animationState]);
 
   if (animationState === 'done') {
     return null;
@@ -44,7 +55,7 @@ export default function PageRevealLoader({ onComplete }) {
       className={`page-reveal-overlay ${animationState === 'animating' ? 'is-revealing' : ''} ${animationState === 'revealed' ? 'is-revealed' : ''}`}
       aria-hidden="true"
     >
-      {/* Background Staggered Vertical Columns */}
+      {/* Background Staggered Vertical Columns (Bottom -> Top Reveal) */}
       <div className="reveal-panels-container">
         {panels.map((panel) => (
           <div
@@ -96,3 +107,6 @@ export default function PageRevealLoader({ onComplete }) {
     </div>
   );
 }
+
+
+

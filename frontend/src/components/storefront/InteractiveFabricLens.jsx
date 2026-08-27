@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import VideoSegmentPlayer from '../interactive/VideoSegmentPlayer';
 
 const FABRIC_SWATCHES = [
   {
@@ -7,6 +8,9 @@ const FABRIC_SWATCHES = [
     name: 'Mustard Yellow Scalloped Aari Embroidery on Raw Silk',
     subtitle: 'Hand-guided needlework with peacock motif, sequin & multi-color resham thread',
     img: '/images/771757318_18098730095578086_4773276763468998885_n.jpg',
+    videoSrc: '/videos/atelier-97057.mp4',
+    startTime: 16.0,
+    endTime: 23.0,
     origin: 'Mahesh Designer Atelier, T. Nagar, Chennai',
     density: '520,000 Micro Stitches',
     hotspots: [
@@ -182,9 +186,25 @@ export default function InteractiveFabricLens() {
             <h3 style={{ fontFamily: 'var(--font-editorial)', fontSize: 'var(--text-2xl)', color: '#FFFFFF', margin: '6px 0 8px' }}>
               {selectedFabric.name}
             </h3>
-            <p style={{ fontSize: 'var(--text-xs)', color: 'rgba(253, 251, 247, 0.85)', lineHeight: 1.7, marginBottom: 'var(--space-6)' }}>
+            <p style={{ fontSize: 'var(--text-xs)', color: 'rgba(253, 251, 247, 0.85)', lineHeight: 1.7, marginBottom: 'var(--space-4)' }}>
               {selectedFabric.subtitle}
             </p>
+
+            {/* Atelier Craftsmanship Video Preview */}
+            {selectedFabric.videoSrc && (
+              <div style={{ marginBottom: 'var(--space-4)', borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--clr-gold)', position: 'relative' }}>
+                <VideoSegmentPlayer
+                  src={selectedFabric.videoSrc}
+                  startTime={selectedFabric.startTime}
+                  endTime={selectedFabric.endTime}
+                  poster={selectedFabric.img}
+                  style={{ width: '100%', height: '130px', objectFit: 'cover' }}
+                />
+                <div style={{ position: 'absolute', bottom: 8, left: 8, background: 'rgba(5, 26, 20, 0.85)', color: 'var(--clr-gold-light)', padding: '3px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.05em' }}>
+                  ✦ LIVE ATELIER FINISHING FOOTAGE
+                </div>
+              </div>
+            )}
 
             {/* Spec Matrix */}
             <div className="fabric-metric-matrix">

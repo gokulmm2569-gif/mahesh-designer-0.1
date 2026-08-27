@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import VideoSegmentPlayer from '../components/interactive/VideoSegmentPlayer';
 
 const GARMENT_TYPES = [
   { id: 'bridal-blouse', title: 'Bridal Aari Blouse', icon: '👘', basePrice: 4500, desc: 'Handcrafted Aari & Pure Silk' },
@@ -101,13 +102,28 @@ export default function CustomStitchingPage() {
   return (
     <div style={{ paddingBottom: 'var(--space-24)', background: 'var(--clr-ivory)' }}>
       {/* Page Header */}
-      <div style={{ background: 'var(--clr-surface)', padding: 'var(--space-12) 0', borderBottom: '1px solid var(--clr-border)' }}>
-        <div className="container text-center">
-          <div className="section-eyebrow">BESPOKE COUTURE ATELIER</div>
-          <h1 className="section-title">Your Measurements. Your Style. Your Dress.</h1>
-          <p className="section-subtitle">
-            Configure every stitch, fabric, neckline, and embroidery pattern. Engineered by master tailors to your exact silhouette.
-          </p>
+      <div style={{ background: 'var(--clr-surface)', padding: 'var(--space-12) 0', borderBottom: '1px solid var(--clr-border)', position: 'relative', overflow: 'hidden' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 'var(--space-8)', alignItems: 'center' }}>
+          <div>
+            <div className="section-eyebrow">BESPOKE COUTURE ATELIER</div>
+            <h1 className="section-title" style={{ textAlign: 'left' }}>Your Measurements. Your Style. Your Dress.</h1>
+            <p className="section-subtitle" style={{ textAlign: 'left', margin: 0 }}>
+              Configure every stitch, fabric, neckline, and embroidery pattern. Engineered by master tailors to your exact silhouette.
+            </p>
+          </div>
+
+          {/* Authentic Tailoring & Craftsmanship Video Preview */}
+          <div className="stitching-craft-video-card" style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1.5px solid var(--clr-gold)', boxShadow: 'var(--shadow-md)', aspectRatio: '16/9' }}>
+            <VideoSegmentPlayer
+              src="/videos/custom-stitching-37842.mp4"
+              startTime={8.0}
+              endTime={15.0}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div style={{ position: 'absolute', bottom: 12, left: 12, background: 'rgba(13, 59, 46, 0.85)', padding: '4px 12px', borderRadius: 'var(--radius-full)', color: 'var(--clr-gold-light)', fontSize: '11px', fontWeight: 700, backdropFilter: 'blur(8px)' }}>
+              ✦ MASTER HAND-STITCHING ATELIER
+            </div>
+          </div>
         </div>
       </div>
 

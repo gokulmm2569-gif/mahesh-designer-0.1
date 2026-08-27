@@ -858,7 +858,11 @@ ul, ol {
 /* ─── Hero Section (Cinematic Editorial Experience) ───────────────── */
 .hero-editorial-section {
   position: relative;
-  background: linear-gradient(180deg, #FDFBF7 0%, #F5F1E8 100%);
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
   padding: 48px 0 90px;
   overflow: hidden;
 }
@@ -923,6 +927,15 @@ ul, ol {
   border-radius: 50%;
   background: var(--clr-gold);
   box-shadow: 0 0 8px var(--clr-gold);
+}
+
+
+
+.hero-editorial-grid,
+.hero-hud-header,
+.hero-ambient-grid {
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes heroContentEntrance {
@@ -999,7 +1012,7 @@ ul, ol {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--clr-emerald);
+  background: var(--clr-emerald-dark, #07261E);
   color: var(--clr-ivory);
   padding: 14px 28px;
   font-size: 11.5px;
@@ -1008,16 +1021,25 @@ ul, ol {
   font-weight: 700;
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--clr-gold);
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 8px 24px rgba(13, 59, 46, 0.25);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(7, 38, 30, 0.25);
+  cursor: pointer;
 }
 
 .btn-vercel-primary:hover {
-  background: var(--clr-emerald-dark);
+  background: #0D3B2E;
   color: var(--clr-gold-light);
   border-color: var(--clr-gold-light);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 14px 32px rgba(13, 59, 46, 0.35), 0 0 20px rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(7, 38, 30, 0.35), 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+.btn-vercel-primary .cta-arrow-icon {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-vercel-primary:hover .cta-arrow-icon {
+  transform: translate(3px, -3px);
 }
 
 .btn-vercel-secondary {
@@ -1028,7 +1050,8 @@ ul, ol {
   border-bottom: 1.5px solid var(--clr-gold);
   padding-bottom: 4px;
   font-weight: 700;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
 .btn-vercel-secondary:hover {
