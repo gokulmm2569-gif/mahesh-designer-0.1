@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import CoutureScissorsCutSection from '../interactive/CoutureScissorsCutSection';
 
 const HERO_LOOKS = [
   {
@@ -119,6 +120,22 @@ export default function HeroSection() {
 
   const current = HERO_LOOKS[displayedLook];
 
+  // Couture Silhouette Line-Art Scroll Reveal Progress Hook
+  const [lineDrawProgress, setLineDrawProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight * 0.8;
+      const rawProgress = Math.min(Math.max(scrollY / heroHeight, 0), 1);
+      setLineDrawProgress(rawProgress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="hero-editorial-section" id="hero" aria-label="Mahesh Designer Editorial Showcase">
       {/* Background Architectural Ambient Grid Lines */}
@@ -126,6 +143,22 @@ export default function HeroSection() {
         <div className="hero-grid-line line-v1" />
         <div className="hero-grid-line line-v2" />
         <div className="hero-grid-line line-h1" />
+      </div>
+
+      {/* Left Couture Garment Silhouette Line-Art Sketch (Ambient Scroll Reveal Layer) */}
+      <div className="hero-couture-lineart" aria-hidden="true">
+        <svg viewBox="0 0 200 450" fill="none" xmlns="http://www.w3.org/2000/svg" className="hero-lineart-svg">
+          <path
+            d="M100 20 C110 25 125 35 120 50 C115 65 105 75 110 90 C115 105 135 120 145 150 C155 180 160 220 165 270 C170 320 175 380 180 430 M100 20 C90 25 75 35 80 50 C85 65 95 75 90 90 C85 105 65 120 55 150 C45 180 40 220 35 270 C30 320 25 380 20 430 M85 50 C100 55 115 50 115 50 M75 90 C100 98 125 90 125 90 M65 140 C100 152 135 140 135 140 M50 210 C100 228 150 210 150 210 M38 290 C100 312 162 290 162 290 M25 370 C100 395 175 370 175 370"
+            stroke="var(--clr-gold)"
+            strokeWidth="0.8"
+            strokeLinecap="round"
+            strokeDasharray="1200"
+            style={{
+              strokeDashoffset: `${1200 * (1 - lineDrawProgress)}`
+            }}
+          />
+        </svg>
       </div>
 
       <div className="container">
@@ -262,12 +295,20 @@ export default function HeroSection() {
                   key={look.id}
                   className={`hero-portrait-slide ${displayedLook === index ? 'active' : ''}`}
                 >
-                  <img
-                    src={look.img}
-                    alt={look.title}
-                    className="hero-portrait-img"
-                    loading="lazy"
-                  />
+                  <a
+                    href="https://www.instagram.com/_mahesh_designers_/?hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit Mahesh Designers on Instagram"
+                    style={{ display: 'block', width: '100%', height: '100%' }}
+                  >
+                    <img
+                      src={look.img}
+                      alt={look.title}
+                      className="hero-portrait-img"
+                      loading="lazy"
+                    />
+                  </a>
                   <div className="hero-portrait-scrim" />
                 </div>
               ))}

@@ -8,6 +8,7 @@ import CustomCursor from './components/interactive/CustomCursor';
 import AmbientCanvas from './components/interactive/AmbientCanvas';
 import PageRevealLoader from './components/interactive/PageRevealLoader';
 import HomePage from './pages/HomePage';
+import CoutureScissorExperience from './pages/CoutureScissorExperience';
 import ProductsPage from './pages/ProductsPage';
 import CustomStitchingPage from './pages/CustomStitchingPage';
 import WishlistPage from './pages/WishlistPage';
@@ -48,6 +49,7 @@ export default function App() {
       <Routes>
         {/* Public Store Routes */}
         <Route path="/" element={<StoreLayout><HomePage /></StoreLayout>} />
+        <Route path="/couture-experience" element={<CoutureScissorExperience />} />
         <Route path="/products" element={<StoreLayout><ProductsPage /></StoreLayout>} />
         <Route path="/custom-stitching" element={<StoreLayout><CustomStitchingPage /></StoreLayout>} />
         <Route path="/wishlist" element={<StoreLayout><WishlistPage /></StoreLayout>} />

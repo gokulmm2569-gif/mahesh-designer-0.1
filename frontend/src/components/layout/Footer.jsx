@@ -19,7 +19,16 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Brand & Overview */}
           <div>
-            <div className="footer-brand-title">MAHESH DESIGNER</div>
+            <a
+              href="https://www.instagram.com/_mahesh_designers_/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-brand-title"
+              aria-label="Visit Mahesh Designers on Instagram"
+              style={{ display: 'inline-block', textDecoration: 'none', color: 'inherit' }}
+            >
+              MAHESH DESIGNER ↗
+            </a>
             <div className="section-tag light" style={{ marginBottom: 'var(--space-3)', color: 'var(--clr-gold-light)' }}>
               ✦ Bespoke Dress Stitching & Bridal Couture
             </div>
