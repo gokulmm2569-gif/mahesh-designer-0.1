@@ -50,7 +50,7 @@ export default function Footer() {
               <li><a href="#craftsmanship" onClick={(e) => { e.preventDefault(); document.getElementById('craftsmanship')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Pure Silk & Banarasi Sarees</a></li>
               <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Flared Couture Lehengas</a></li>
               <li><a href="#collections" onClick={(e) => { e.preventDefault(); document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Kalidar Anarkalis</a></li>
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="VIEW">Reception Party Wear</a></li>
+              <li><Link to="/products" data-cursor="VIEW">Reception Party Wear</Link></li>
             </ul>
           </div>
 
@@ -58,11 +58,11 @@ export default function Footer() {
           <div>
             <div className="footer-col-title">Custom Tailoring</div>
             <ul className="footer-links">
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="STUDIO">🪡 Custom Stitching Studio</a></li>
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="MEASURE">Live Measurement Matrix</a></li>
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="EMBROIDER">Aari & Zardozi Customization</a></li>
+              <li><Link to="/custom-stitching" data-cursor="STUDIO">🪡 Custom Stitching Studio</Link></li>
+              <li><Link to="/custom-stitching" data-cursor="MEASURE">Live Measurement Matrix</Link></li>
+              <li><Link to="/custom-stitching" data-cursor="EMBROIDER">Aari & Zardozi Customization</Link></li>
               <li><Link to="/orders" data-cursor="ORDERS">Order Tracking & Dispatch</Link></li>
-              <li><a href="#atelier" onClick={(e) => { e.preventDefault(); document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' }); }} data-cursor="BLUEPRINT">Live Bespoke Tailoring Blueprint</a></li>
+              <li><Link to="/custom-stitching" data-cursor="BLUEPRINT">Live Bespoke Tailoring Blueprint</Link></li>
             </ul>
           </div>
 

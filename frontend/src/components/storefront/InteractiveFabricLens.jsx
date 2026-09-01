@@ -248,18 +248,14 @@ export default function InteractiveFabricLens() {
 
             {/* Action Triggers */}
             <div style={{ display: 'flex', gap: 'var(--space-4)', marginTop: 'var(--space-6)' }}>
-              <a
-                href="#atelier"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('atelier')?.scrollIntoView({ behavior: 'smooth' });
-                }}
+              <Link
+                to="/custom-stitching"
                 className="btn btn-gold btn-lg"
                 style={{ flex: 1, textAlign: 'center' }}
                 data-cursor="STITCH"
               >
                 🪡 Stitch With This Fabric →
-              </a>
+              </Link>
               <a
                 href="#collections"
                 onClick={(e) => {

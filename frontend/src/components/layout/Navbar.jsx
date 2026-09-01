@@ -24,10 +24,11 @@ export default function Navbar() {
 
   return (
     <header className="luxury-glass-navbar" id="site-header">
-      <div className="container navbar-inner-container">
+      <div className="navbar-split-container">
+        {/* Left Floating Brand Pill */}
         <Link
           to="/"
-          className="navbar-brand"
+          className="navbar-brand-pill"
           aria-label="Mahesh Designer Home"
           onClick={(e) => handleNavClick(e, 'hero')}
           data-cursor="MD"
@@ -41,49 +42,13 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Editorial Nav Links */}
-        <nav className="navbar-nav-links" aria-label="Main Navigation">
-          <a
-            href="#collections"
-            onClick={(e) => handleNavClick(e, 'collections')}
-            className="nav-link"
-            data-cursor="VIEW"
-          >
-            The Collection
-          </a>
-          <a
-            href="#about"
-            onClick={(e) => handleNavClick(e, 'about')}
-            className="nav-link"
-            data-cursor="PHILOSOPHY"
-          >
-            Philosophy
-          </a>
-          <a
-            href="#craftsmanship"
-            onClick={(e) => handleNavClick(e, 'craftsmanship')}
-            className="nav-link"
-            data-cursor="CRAFT"
-          >
-            Craftsmanship
-          </a>
-          <a
-            href="#atelier"
-            onClick={(e) => handleNavClick(e, 'atelier')}
-            className="nav-link"
-            data-cursor="STUDIO"
-          >
-            Live Atelier
-          </a>
-        </nav>
-
-        {/* Bespoke Concierge Action CTA */}
-        <div className="navbar-action-wrap">
+        {/* Right Floating Action Pill */}
+        <div className="navbar-action-pill-wrap">
           <a
             href="https://www.instagram.com/_mahesh_designers_/?hl=en"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-concierge-btn"
+            className="nav-concierge-pill"
             aria-label="Visit Mahesh Designers on Instagram"
             data-cursor="BOOK"
           >

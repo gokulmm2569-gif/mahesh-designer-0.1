@@ -242,7 +242,6 @@ const SERVICES = [
 
 export default function CollectionsSection() {
   const [activeCategory, setActiveCategory] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const [activeService, setActiveService] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const quoteRef = useRef(null);
@@ -344,14 +343,8 @@ export default function CollectionsSection() {
       {/* 1. Category Strip / Spatial Interactive Nodes (14-Card Continuous Marquee Gallery) */}
       <section className="category-strip-section" aria-label="Fashion categories">
         <div className="container">
-          <div 
-            className="category-marquee-wrapper"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onTouchStart={() => setIsHovered(true)}
-            onTouchEnd={() => setIsHovered(false)}
-          >
-            <div className={`category-marquee-track ${isHovered ? 'is-paused' : ''}`}>
+          <div className="category-marquee-wrapper">
+            <div className="category-marquee-track">
               {/* Primary Group (Cards 01-14) */}
               <div className="category-marquee-group">
                 {FASHION_CATEGORIES.map((cat, idx) => {
@@ -538,9 +531,8 @@ export default function CollectionsSection() {
               <p className="section-eyebrow-accent">Selected work</p>
               <h2 className="selected-work-title">The collection.</h2>
             </div>
-            <a
-              href="#atelier"
-              onClick={(e) => { e.preventDefault(); scrollTo('atelier'); }}
+            <Link
+              to="/products"
               className="view-all-link"
               data-cursor="ATELIER"
             >
@@ -549,7 +541,7 @@ export default function CollectionsSection() {
                 <path d="M7 7h10v10"></path>
                 <path d="M7 17 17 7"></path>
               </svg>
-            </a>
+            </Link>
           </div>
 
           <div className="selected-work-grid">
@@ -652,12 +644,8 @@ export default function CollectionsSection() {
                 <p className="practice-quote-subtext">
                   From the first sketch to the final fitting, every Mahesh piece is built through conversation, craft, and a belief that elegance should feel like you.
                 </p>
-                <a
-                  href="#atelier"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo('atelier');
-                  }}
+                <Link
+                  to="/custom-stitching"
                   className="practice-quote-cta magnetic-btn"
                   data-cursor="CONNECT"
                 >
@@ -666,7 +654,7 @@ export default function CollectionsSection() {
                     <path d="M7 7h10v10"></path>
                     <path d="M7 17 17 7"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

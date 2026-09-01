@@ -1,7 +1,7 @@
 import HeroSection from '../components/storefront/HeroSection';
 import CollectionsSection from '../components/storefront/CollectionsSection';
 import InteractiveFabricLens from '../components/storefront/InteractiveFabricLens';
-import LiveAtelierConfigurator from '../components/storefront/LiveAtelierConfigurator';
+import AtelierFilmShowcase from '../components/storefront/AtelierFilmShowcase';
 
 export default function HomePage() {
   return (
@@ -15,8 +15,8 @@ export default function HomePage() {
       {/* 3. Haute Couture Fabric Lens & Inspection Magnifier (Motiff Bespoke) */}
       <InteractiveFabricLens />
 
-      {/* 4. Live Digital Atelier Configurator & Blueprint (GoStitchNest + Dudduel) */}
-      <LiveAtelierConfigurator />
+      {/* 4. Full-Length Living Atelier Craftsmanship Film (Above Footer) */}
+      <AtelierFilmShowcase />
     </main>
   );
 }

@@ -507,45 +507,63 @@ ul, ol {
   background: #FFFFFF;
 }
 
-/* ─── 1. Glassmorphism Sticky Navbar (Top: 0, Z-Index: 1000) ───────── */
+/* ─── 1. Floating Split Pill Navbar (Top: 0, Z-Index: 1000, Transparent Bar with Floating Glass Capsules) ─── */
 .luxury-glass-navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   width: 100%;
-  background: rgba(248, 246, 240, 0.72);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px rgba(7, 38, 30, 0.04);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: none;
+  box-shadow: none;
+  pointer-events: none;
+  padding: 16px 28px 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.navbar-inner-container {
+.navbar-split-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  width: 100%;
+  max-width: var(--container-max, 1400px);
+  margin-left: auto;
+  margin-right: auto;
   gap: 24px;
 }
 
-.navbar-brand {
-  display: flex;
+/* Left Brand Floating Glass Capsule */
+.navbar-brand-pill {
+  pointer-events: auto;
+  display: inline-flex;
   align-items: center;
   gap: 14px;
   text-decoration: none;
+  background: rgba(248, 246, 240, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 9999px;
+  padding: 7px 22px 7px 8px;
+  box-shadow: 0 8px 24px rgba(7, 38, 30, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
-  padding: 0;
+}
+
+.navbar-brand-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.96);
+  border-color: var(--clr-gold);
+  box-shadow: 0 12px 30px rgba(7, 38, 30, 0.12), 0 0 16px rgba(212, 175, 55, 0.2);
 }
 
 .navbar-brand-logo {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: var(--clr-emerald-dark, #07261E);
   border: 1px solid var(--clr-gold);
@@ -561,8 +579,8 @@ ul, ol {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.navbar-brand:hover .navbar-brand-logo {
-  transform: scale(1.03);
+.navbar-brand-pill:hover .navbar-brand-logo {
+  transform: scale(1.04);
   box-shadow: 0 6px 18px rgba(7, 38, 30, 0.25);
 }
 
@@ -575,88 +593,84 @@ ul, ol {
 
 .navbar-brand-name {
   font-family: var(--font-editorial);
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--clr-charcoal);
 }
 
 .navbar-brand-tagline {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 0.16em;
   color: var(--clr-slate);
 }
 
-.navbar-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-link {
-  font-family: var(--font-functional);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--clr-charcoal);
-  text-decoration: none;
-  position: relative;
-  transition: color 0.25s ease;
-}
-
-.nav-link:hover {
-  color: var(--clr-emerald-dark);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0%;
-  height: 1.5px;
-  background: var(--clr-gold);
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.navbar-action-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.nav-concierge-btn {
+/* Right Concierge Action Floating Glass Capsule */
+.navbar-action-pill-wrap {
+  pointer-events: auto;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.nav-concierge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(248, 246, 240, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 9999px;
+  padding: 12px 22px;
+  font-family: var(--font-functional, -apple-system, BlinkMacSystemFont, sans-serif);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 8px 18px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--clr-gold);
-  color: var(--clr-emerald-dark);
-  background: rgba(212, 175, 55, 0.1);
+  color: var(--clr-emerald-dark, #07261E);
   text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(7, 38, 30, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-concierge-btn:hover {
-  background: var(--clr-emerald-dark);
-  color: var(--clr-gold-light);
-  border-color: var(--clr-emerald-dark);
-  box-shadow: 0 4px 14px rgba(7, 38, 30, 0.2);
+.nav-concierge-pill:hover {
+  transform: translateY(-2px);
+  background: var(--clr-emerald-dark, #07261E);
+  color: var(--clr-gold-light, #F3E5AB);
+  border-color: var(--clr-gold, #D4AF37);
+  box-shadow: 0 12px 30px rgba(7, 38, 30, 0.22), 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
-@media (max-width: 860px) {
-  .navbar-nav-links {
-    display: none;
+.nav-concierge-pill .gold-arrow {
+  color: var(--clr-gold, #D4AF37);
+  font-size: 13px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.nav-concierge-pill:hover .gold-arrow {
+  transform: translate(2px, -2px);
+  color: var(--clr-gold-light, #F3E5AB);
+}
+
+@media (max-width: 768px) {
+  .luxury-glass-navbar {
+    padding: 12px 16px 0;
+  }
+  .navbar-brand-pill {
+    padding: 6px 14px 6px 6px;
+    gap: 10px;
+  }
+  .navbar-brand-name {
+    font-size: 1.05rem;
+  }
+  .navbar-brand-tagline {
+    font-size: 7.5px;
+  }
+  .nav-concierge-pill {
+    padding: 10px 16px;
+    font-size: 10px;
   }
 }
 
@@ -1551,11 +1565,6 @@ ul, ol {
   width: max-content;
   will-change: transform;
   animation: continuousEditorialMarquee 80s linear infinite;
-}
-
-.category-marquee-track.is-paused,
-.category-marquee-wrapper:hover .category-marquee-track {
-  animation-play-state: paused;
 }
 
 .category-marquee-group {
@@ -4296,6 +4305,34 @@ button:hover .cta-arrow-icon,
   letter-spacing: 0.04em;
   color: var(--clr-gold-light);
   margin-top: 4px;
+}
+
+/* ─── Haute Couture Atelier Film Section ─────────────────────────────── */
+.atelier-film-section {
+  padding: clamp(60px, 8vw, 110px) 0 clamp(40px, 6vw, 80px);
+  background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+              linear-gradient(180deg, #FDFBF7 0%, #F5F2EA 100%);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.atelier-film-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+}
+
+.luxury-video-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.luxury-video-card:hover {
+  box-shadow: 0 30px 80px -20px rgba(13, 59, 46, 0.45), 0 0 50px rgba(212, 175, 55, 0.25) !important;
 }
 
 /* ─── 7. Footer (Editorial Softened Gradient & 1px Gold Top Border) ────── */
